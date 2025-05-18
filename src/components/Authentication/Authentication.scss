@@ -24,7 +24,7 @@
   &__card {
     position: relative;
     top: 150px;
-    background-color: #80532d;
+    background-color: $koffeepos-caramel;
 
     @include tablet {
       margin: auto;
