@@ -1,0 +1,47 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mediaquery" as *;
+@use "../../styles/partials/fonts" as *;
+
+.wrapper-sidebar {
+  background-color: $koffeepos-beige;
+}
+
+.logo-container {
+  display: flex;
+  background-color: $koffeepos-caramel;
+  height: 55px;
+}
+
+.logo {
+  &__header {
+    text-align: center;
+    margin: auto;
+    color: $koffeepos-beige;
+    font-size: 1.5rem;
+    font-family: $cinzel;
+  }
+}
+
+.sidebar {
+  &__title {
+    color: $koffeepos-darkmocha;
+    font-family: $roboto;
+    font-weight: 300;
+    padding-bottom: 1rem;
+  }
+
+  &__item {
+    font-family: $roboto;
+    font-weight: 300;
+    color: $koffeepos-darkmocha;
+    padding: 1.9rem 0;
+
+    &:hover {
+      background-color: $koffeepos-beige;
+    }
+
+    svg {
+      color: $koffeepos-caramel;
+    }
+  }
+}
