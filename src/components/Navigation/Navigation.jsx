@@ -51,7 +51,7 @@ function Navigation() {
             <SidebarItemGroup>
               <SidebarItem
                 className="sidebar__item"
-                href="/POS"
+                href="/pos"
                 icon={HiDesktopComputer}
               >
                 POS

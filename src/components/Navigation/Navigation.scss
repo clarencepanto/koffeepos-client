@@ -2,6 +2,9 @@
 @use "../../styles/partials/mediaquery" as *;
 @use "../../styles/partials/fonts" as *;
 
+html {
+  background-color: $koffeepos-beige;
+}
 .wrapper-sidebar {
   background-color: $koffeepos-beige;
 }

@@ -30,9 +30,9 @@ function Authentication() {
 
       // Redirect based on role
       if (decoded.role === "manager") {
-        navigate("/dashboard/manager");
+        navigate("/pos");
       } else if (decoded.role === "barista") {
-        navigate("/dashboard/barista");
+        navigate("/pos");
       }
     } catch (error) {
       if (error.response.data.error == "Invalid Password") {
