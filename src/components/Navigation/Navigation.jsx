@@ -1,4 +1,5 @@
 import "./Navigation.scss";
+import TitleNav from "../TitleNav/TitleNav";
 import { createTheme, ThemeProvider } from "flowbite-react";
 import {
   Sidebar,
@@ -34,18 +35,18 @@ function Navigation() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="wrapper-sidebar">
-      <div className="logo-container logo">
+    <>
+      <div className="w-full logo-container logo">
         <button
           className="block md:hidden"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         >
           <HiViewList />
         </button>
-        <h1 className="logo__header">KOFFEEPOS</h1>
+        <TitleNav />
       </div>
       <ThemeProvider theme={customTheme}>
-        <Sidebar className="h-screen hidden md:block sidebar">
+        <Sidebar className="h-screen hidden md:block max-w-xl  sidebar">
           <h1 className="sidebar__title">WELCOME MANAGER</h1>
           <SidebarItems>
             <SidebarItemGroup>
@@ -117,7 +118,7 @@ function Navigation() {
           </Sidebar>
         )}
       </ThemeProvider>
-    </div>
+    </>
   );
 }
 

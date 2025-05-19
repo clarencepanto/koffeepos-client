@@ -3,26 +3,17 @@
 @use "../../styles/partials/fonts" as *;
 
 html {
-  background-color: $koffeepos-beige;
-}
-.wrapper-sidebar {
-  background-color: $koffeepos-beige;
+  @include desktop {
+    background: url("../../assets/images/pexels-emrecan-2079438.jpg") no-repeat
+      top center/cover;
+    overflow-y: hidden;
+  }
 }
 
 .logo-container {
   display: flex;
   background-color: $koffeepos-caramel;
   height: 55px;
-}
-
-.logo {
-  &__header {
-    text-align: center;
-    margin: auto;
-    color: $koffeepos-beige;
-    font-size: 1.5rem;
-    font-family: $cinzel;
-  }
 }
 
 .sidebar {
