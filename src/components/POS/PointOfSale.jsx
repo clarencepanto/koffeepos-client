@@ -8,13 +8,20 @@ import {
   ModalHeader,
   Label,
   Radio,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeadCell,
+  TableRow,
+  Select,
 } from "flowbite-react";
 import { useState } from "react";
 import Navigation from "../Navigation/Navigation";
 
 function PointOfSale() {
   const [openModal, setOpenModal] = useState(false);
-  const [modalPlacement, setModalPlacement] = useState("center");
+  const [openModalCheckout, setOpenModalCheckout] = useState(false);
 
   return (
     <div className="pos-container  pos">
@@ -118,15 +125,16 @@ function PointOfSale() {
 
       <Modal
         show={openModal}
-        position={modalPlacement}
+        position="center"
         onClose={() => setOpenModal(false)}
       >
         <ModalHeader>Get Coffee</ModalHeader>
+
         <ModalBody>
           {/* drink sizes */}
           <section className="flex gap-20">
             <div className="flex max-w-md flex-col gap-4">
-              <h5 className="dark:text-white pr-[5px] text-xl">Drink size</h5>
+              <h5 className="dark:text-white pr-[5px] text-md">Drink size</h5>
               <div className="flex items-center gap-2">
                 <Radio id="small" name="sizes" value="small" defaultChecked />
                 <Label htmlFor="medium">Small</Label>
@@ -140,9 +148,10 @@ function PointOfSale() {
                 <Label htmlFor="large">Large</Label>
               </div>
             </div>
+
             {/* Sugar Selection */}
             <div className="flex max-w-md flex-col gap-4">
-              <h5 className="dark:text-white pr-[5px] text-xl">Sugar Levels</h5>
+              <h5 className="dark:text-white pr-[5px] text-md">Sugar Levels</h5>
               <div className="flex items-center gap-2">
                 <Radio id="full" name="levels" value="full" defaultChecked />
                 <Label htmlFor="full">100%</Label>
@@ -156,9 +165,10 @@ function PointOfSale() {
                 <Label htmlFor="none">0%</Label>
               </div>
             </div>
+
             {/* hot or cold */}
             <div className="flex max-w-md flex-col gap-4">
-              <h5 className="dark:text-white pr-[5px] text-xl">Hot or Iced</h5>
+              <h5 className="dark:text-white pr-[5px] text-md">Hot or Iced</h5>
               <div className="flex items-center gap-2">
                 <Radio id="hot" name="temp" value="hot" defaultChecked />
                 <Label htmlFor="hot">Hot</Label>
@@ -167,6 +177,15 @@ function PointOfSale() {
                 <Radio id="iced" name="temp" value="iced" />
                 <Label htmlFor="iced">Iced</Label>
               </div>
+            </div>
+
+            {/* quantity */}
+            <div className="flex max-w-md flex-col gap-2">
+              <h5 className="dark:text-white pr-[5px] text-md">Quantity</h5>
+              <input
+                type="text"
+                className="max-w-10 bg-white outline-blue-500"
+              />
             </div>
           </section>
         </ModalBody>
@@ -178,7 +197,173 @@ function PointOfSale() {
         </ModalFooter>
       </Modal>
 
-      <section className="pos__cart h-[88%] w-[20%]">Cart</section>
+      {/* cart */}
+      <section className="h-[95%] w-[20%] pos__cart-container pos__cart">
+        <div className="relative max-h-150 overflow-y-auto pos__cart__monitor">
+          <Table className="min-w-full table-auto mb-20">
+            <TableHead className="sticky top-0">
+              <TableRow>
+                <TableHeadCell className=" pos__cart__monitor__table-head">
+                  Product name
+                </TableHeadCell>
+                <TableHeadCell className="pos__cart__monitor__table-head">
+                  Price
+                </TableHeadCell>
+              </TableRow>
+            </TableHead>
+            <TableBody className="divide-y">
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Espresso 1x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $2.5
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Matcha Latte 10x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Americano 2x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $7.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cortado 4x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $8.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cortado 4x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $8.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Flat White 1x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $8.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cortado 4x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $8.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Flat White 1x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $8.50
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+
+      {/* checkout price  */}
+      <section className="absolute right-0 bottom-0 pos__checkout">
+        <Card
+          href="#"
+          className=" max-w-sm rounded-none pos__checkout__taxscreen"
+        >
+          <div className="flex justify-between">
+            <h5 className="text-8px font-bold tracking-tight  dark:text-white">
+              Tax:
+            </h5>
+            <h5 className="text-8px font-bold tracking-tight  dark:text-white">
+              $22.50
+            </h5>
+          </div>
+          <div className="flex justify-between relative h-30 ">
+            <h5 className="text-xl font-bold tracking-tight  dark:text-white">
+              Total Price:
+            </h5>
+            <h5 className="text-xl font-bold tracking-tight  dark:text-white">
+              $44.50
+            </h5>
+          </div>
+        </Card>
+      </section>
+
+      {/* Buy now */}
+
+      <section className="absolute right-19 bottom-15">
+        <Button onClick={() => setOpenModalCheckout(true)}>Checkout</Button>
+        <Modal
+          show={openModalCheckout}
+          onClose={() => setOpenModalCheckout(false)}
+        >
+          <ModalHeader>Checkout</ModalHeader>
+          <ModalBody>
+            {/* Final summary of orders */}
+            <h2 className="text-white">Orders</h2>
+            <p className="text-white">Espresso 1x</p>
+            <p className="text-white">Espresso 1x</p>
+            <p className="text-white">Espresso 1x</p>
+            <p className="text-white">Espresso 1x</p>
+            <p className="text-white">Espresso 1x</p>
+            <p className="text-white">Espresso 1x</p>
+            <p className="text-white">Espresso 1x</p>
+            <p className="text-white">Espresso 1x</p>
+            {/* select a payment option */}
+            <div className="space-y-6">
+              <div className="max-w-md">
+                <div className="mb-2 block">
+                  <Label htmlFor="payment-methods">
+                    Select the payment option
+                  </Label>
+                </div>
+                <Select id="payment-methods" required>
+                  <option>Mastercard</option>
+                  <option>Visa</option>
+                  <option>Amex</option>
+                  <option>Cash</option>
+                </Select>
+              </div>
+            </div>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={() => setOpenModalCheckout(false)}>Pay Now</Button>
+          </ModalFooter>
+        </Modal>
+      </section>
     </div>
   );
 }

@@ -27,7 +27,7 @@
         font-weight: 300;
         font-size: 1.2rem;
         color: $koffeepos-darkmocha;
-        padding: 0.7rem 1rem;
+        padding: 0.5rem 1rem;
 
         &:hover {
           background-color: $koffeepos-beige;
@@ -65,7 +65,35 @@
       position: absolute;
       top: 3.4rem;
       left: 64rem;
-      background-color: #333;
+      background-color: #d2b48c;
     }
+
+    &__monitor {
+      @include desktop {
+        bottom: 0.1rem;
+      }
+      &__table-head {
+        @include desktop {
+          border-radius: 0;
+          background-color: #d2b48c;
+          color: $koffeepos-darkmocha;
+          font-family: $roboto;
+          font-weight: 500;
+          border-right: 1px solid $koffeepos-darkmocha;
+        }
+      }
+      &__table-data {
+        @include desktop {
+          border-radius: 0;
+          background-color: #d2b48c;
+          color: $koffeepos-darkmocha;
+          font-family: $roboto;
+        }
+      }
+    }
+  }
+
+  &__checkout {
+    min-width: 256px;
   }
 }
