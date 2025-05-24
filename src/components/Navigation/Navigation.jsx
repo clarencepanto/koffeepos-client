@@ -51,13 +51,17 @@ function Navigation() {
           <SidebarItems>
             <SidebarItemGroup>
               <SidebarItem
-                className="sidebar__item"
+                className="sidebar__item sidebar__item--hide"
                 href="/pos"
                 icon={HiDesktopComputer}
               >
                 POS
               </SidebarItem>
-              <SidebarItem className="sidebar__item" href="#" icon={TiCoffee}>
+              <SidebarItem
+                className="sidebar__item"
+                href="/products"
+                icon={TiCoffee}
+              >
                 Products
               </SidebarItem>
               <SidebarItem
@@ -84,6 +88,8 @@ function Navigation() {
             </SidebarItemGroup>
           </SidebarItems>
         </Sidebar>
+
+        {/* mobile hamburger menu */}
         {isSidebarOpen && (
           <Sidebar className="h-screen block md:hidden max-w-2/4">
             <h1 className="sidebar__title">WELCOME MANAGER</h1>

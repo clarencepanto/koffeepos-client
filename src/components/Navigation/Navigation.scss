@@ -30,6 +30,16 @@ html {
     color: $koffeepos-darkmocha;
     padding: 1.9rem 0;
 
+    &--hide {
+      @include tablet {
+        display: none;
+      }
+
+      @include desktop {
+        display: flex;
+      }
+    }
+
     &:hover {
       background-color: $koffeepos-beige;
     }
