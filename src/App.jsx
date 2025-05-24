@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PointOfSale from "./components/POS/PointOfSale";
 import Authentication from "./components/Authentication/Authentication";
 import Products from "./components/Products/Products";
+import Ingredients from "./components/Ingredients/Ingredients";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Authentication />}></Route>
           <Route path="/pos" element={<PointOfSale />}></Route>
           <Route path="/products" element={<Products />}></Route>
+          <Route path="/ingredients" element={<Ingredients />}></Route>
         </Routes>
         <ToastContainer />
       </BrowserRouter>

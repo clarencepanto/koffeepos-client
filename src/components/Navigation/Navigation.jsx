@@ -66,7 +66,7 @@ function Navigation() {
               </SidebarItem>
               <SidebarItem
                 className="sidebar__item"
-                href="#"
+                href="/ingredients"
                 icon={HiOutlineClipboard}
               >
                 Ingredients

@@ -199,7 +199,7 @@ function PointOfSale() {
 
       {/* cart */}
       <section className="h-[95%] w-[20%] pos__cart-container pos__cart">
-        <div className="relative max-h-150 overflow-y-auto pos__cart__monitor">
+        <div className=" max-h-150 overflow-y-auto pos__cart__monitor">
           <Table className="min-w-full table-auto mb-20">
             <TableHead className="sticky top-0">
               <TableRow>
