@@ -15,7 +15,7 @@ function Products() {
   return (
     <div>
       <Navigation />
-      <section className=" bg-[#f5ecd5]/6 backdrop-blur-sm border border-white/20 rounded-xl hidden md:block min-w-240 h-[80%] overflow-y-scroll   product__monitor">
+      <section className=" bg-[#f5ecd5]/6 backdrop-blur-sm  border-white/20 rounded-xl hidden md:block min-w-245 box-border h-[80%] overflow-y-scroll product__monitor">
         <Card
           className="max-w-[170px] product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
@@ -171,34 +171,42 @@ function Products() {
           <h6 className="text-center dark:text-white font-bold ">
             Available: 25
           </h6>
+        </Card>
+        <Card
+          className="max-w-[170px] product__monitor__products"
+          imgSrc="https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          onClick={() => setOpenModal(true)}
+        >
+          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
+            Create Product
+          </h5>
         </Card>
       </section>
       {/* modal */}
 
-      <Modal show={openModal} onClose={() => setOpenModal(false)}>
-        <ModalHeader>Terms of Service</ModalHeader>
-        <ModalBody>
-          <div className="space-y-6">
-            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-              With less than a month to go before the European Union enacts new
-              consumer privacy laws for its citizens, companies around the world
-              are updating their terms of service agreements to comply.
-            </p>
-            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-              The European Union’s General Data Protection Regulation (G.D.P.R.)
-              goes into effect on May 25 and is meant to ensure a common set of
-              data rights in the European Union. It requires organizations to
-              notify users as soon as possible of high-risk data breaches that
-              could personally affect them.
-            </p>
-          </div>
+      <Modal
+        className="product__modal"
+        show={openModal}
+        onClose={() => setOpenModal(false)}
+      >
+        <ModalHeader>How To Make</ModalHeader>
+        <ModalBody className="flex">
+          <section className="text-white">
+            <h2 className="text-3xl pb-5">Americano</h2>
+            <article>20ml Milk</article>
+            <article>2g Chocolate chip</article>
+            <article>2g Coffee grain</article>
+          </section>
+          <section className="text-white pl-20">
+            <h2 className="text-3xl pb-5">Instructions</h2>
+            <article>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Doloremque obcaecati libero, quisquam voluptates tenetur
+              laudantium, tempora magni similique recusandae optio fugiat
+            </article>
+          </section>
         </ModalBody>
-        <ModalFooter>
-          <Button onClick={() => setOpenModal(false)}>I accept</Button>
-          <Button color="gray" onClick={() => setOpenModal(false)}>
-            Decline
-          </Button>
-        </ModalFooter>
+        <ModalFooter></ModalFooter>
       </Modal>
     </div>
   );
