@@ -80,10 +80,24 @@ function Navigation() {
               </SidebarItem>
               <SidebarItem
                 className="sidebar__item"
-                href="#"
+                href="/supplier"
                 icon={HiOutlineTruck}
               >
                 Order Supplies
+              </SidebarItem>
+              <SidebarItem
+                className="sidebar__item"
+                href="/theusuals"
+                icon={HiOutlineTruck}
+              >
+                The Usuals
+              </SidebarItem>
+              <SidebarItem
+                className="sidebar__item"
+                href="/logout"
+                icon={HiOutlineTruck}
+              >
+                Logout
               </SidebarItem>
             </SidebarItemGroup>
           </SidebarItems>

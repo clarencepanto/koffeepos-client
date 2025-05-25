@@ -6,6 +6,7 @@ import Authentication from "./components/Authentication/Authentication";
 import Products from "./components/Products/Products";
 import Ingredients from "./components/Ingredients/Ingredients";
 import SummaryTable from "./components/SummaryTable/SummaryTable";
+import Supplier from "./components/Supplier/Supplier";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
           <Route path="/products" element={<Products />}></Route>
           <Route path="/ingredients" element={<Ingredients />}></Route>
           <Route path="/summarytable" element={<SummaryTable />}></Route>
+          <Route path="/supplier" element={<Supplier />}></Route>
+          <Route path="/logout" element={<Authentication />}></Route>
         </Routes>
         <ToastContainer />
       </BrowserRouter>
