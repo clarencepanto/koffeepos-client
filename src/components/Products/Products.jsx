@@ -2,7 +2,6 @@ import "./Products.scss";
 import Navigation from "../Navigation/Navigation";
 import {
   Card,
-  Button,
   Modal,
   ModalBody,
   ModalFooter,
