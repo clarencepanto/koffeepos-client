@@ -2,7 +2,7 @@
 @use "../../styles/partials/mediaquery" as *;
 @use "../../styles/partials/fonts" as *;
 
-.product__monitor {
+.summarytable__monitor {
   @include desktop {
     position: absolute;
     top: 6rem;
@@ -10,19 +10,5 @@
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-  }
-
-  &__products {
-    @include desktop {
-      margin: 0.9rem;
-    }
-
-    img {
-      @include desktop {
-        height: 132px;
-        width: 198px;
-        object-fit: cover;
-      }
-    }
   }
 }

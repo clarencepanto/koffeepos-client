@@ -1,4 +1,3 @@
-import "./Ingredients.scss";
 import {
   Table,
   TableBody,

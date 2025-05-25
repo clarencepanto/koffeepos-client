@@ -5,6 +5,7 @@ import PointOfSale from "./components/POS/PointOfSale";
 import Authentication from "./components/Authentication/Authentication";
 import Products from "./components/Products/Products";
 import Ingredients from "./components/Ingredients/Ingredients";
+import SummaryTable from "./components/SummaryTable/SummaryTable";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/pos" element={<PointOfSale />}></Route>
           <Route path="/products" element={<Products />}></Route>
           <Route path="/ingredients" element={<Ingredients />}></Route>
+          <Route path="/summarytable" element={<SummaryTable />}></Route>
         </Routes>
         <ToastContainer />
       </BrowserRouter>

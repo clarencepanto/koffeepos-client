@@ -73,7 +73,7 @@ function Navigation() {
               </SidebarItem>
               <SidebarItem
                 className="sidebar__item"
-                href="#"
+                href="/summarytable"
                 icon={HiOutlineChartSquareBar}
               >
                 Summary Table
