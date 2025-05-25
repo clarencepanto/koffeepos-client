@@ -20,13 +20,13 @@ function SummaryTable() {
       <Navigation />
       <section className="bg-[#f5ecd5]/6 backdrop-blur-sm  border-white/20 rounded-xl hidden md:block min-w-245 box-border h-[80%] p-5  summarytable__monitor">
         <div className="flex justify-around w-[100%]">
-          <Card href="#" className="max-w-80 ">
+          <Card href="#" className="min-w-80">
             <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               Revenue Today
             </h5>
             <p className="font-normal text-5xl dark:text-gray-400">$32K</p>
           </Card>
-          <Card href="#" className="max-w-90">
+          <Card href="#" className="min-w-90">
             <h5
               className="text-2xl
              font-bold tracking-tight text-gray-900 dark:text-white"
@@ -42,12 +42,12 @@ function SummaryTable() {
               Customers Served
             </h5>
             <p className="font-normal text-gray-700 dark:text-gray-400 text-5xl">
-              200
+              200+
             </p>
           </Card>
         </div>
         <Bargraph />
-        <Card href="#" className="max-w-80 ml-10 ">
+        <Card href="#" className="min-w-115 min-h-82 ml-10 ">
           <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Inventory and Sales Records
           </h5>
