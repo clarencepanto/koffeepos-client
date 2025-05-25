@@ -92,7 +92,7 @@ function Bargraph() {
 
   return (
     <div>
-      <Card className="min-w-245 bg-[#d2b48c]  ">
+      <Card className="min-w-150 bg-[#d2b48c]  ">
         <CardHeader
           floated={false}
           shadow={false}
