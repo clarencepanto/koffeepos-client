@@ -3,28 +3,59 @@
 @use "../../styles/partials/fonts" as *;
 
 .product__monitor {
+  margin-top: 2rem;
+  padding: 0.5rem;
+  gap: 40px;
+
+  @media (min-width: 425px) {
+    gap: 15px;
+  }
+  @include tablet {
+    position: absolute;
+    top: 5.5rem;
+    left: 16rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 11px;
+  }
   @include desktop {
     position: absolute;
     top: 6rem;
-    left: 22rem;
+    left: 15.9rem;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
   }
 
   &__products {
+    font-size: 0.45rem;
+    width: 90px;
+    height: 145px;
+
+    @include tablet {
+      font-size: 0.8rem;
+      min-width: 150px;
+      min-height: 200px;
+    }
     @include desktop {
-      margin: 0.9rem;
+      margin: 0.2rem;
     }
 
     img {
+      max-width: 100px;
+      max-height: 50px;
+      object-fit: cover;
+
       @include tablet {
-        width: 100px;
+        min-width: 150px;
+        max-height: 90px;
+        object-fit: cover;
       }
 
       @include desktop {
-        height: 132px;
-        width: 198px;
+        height: 136px;
+        min-width: 150px;
         object-fit: cover;
       }
     }

@@ -14,9 +14,9 @@ function Products() {
   return (
     <div>
       <Navigation />
-      <section className="bg-[#f5ecd5]/6 backdrop-blur-sm  border-white/20 rounded-xl   md:block lg:max-w-200  h-[80%] overflow-y-scroll product__monitor">
+      <section className="bg-[#f5ecd5]/6 backdrop-blur-sm  border-white/20 rounded-xl flex flex-wrap  md:block lg:max-w-450  h-[80%] overflow-y-scroll product__monitor">
         <Card
-          className="w-25 h-50 lg:h-61 lg:w-[150px]  product__monitor__products"
+          className="lg:max-w-[170px] md:h-[220px] max-w-50  product__monitor__products  "
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
           onClick={() => setOpenModal(true)}
@@ -29,7 +29,7 @@ function Products() {
           </h6>
         </Card>
         <Card
-          className="max-w-[170px] product__monitor__products"
+          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/911810/pexels-photo-911810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           onClick={() => setOpenModal(true)}
@@ -42,7 +42,7 @@ function Products() {
           </h6>
         </Card>
         <Card
-          className="max-w-[170px] product__monitor__products"
+          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/3704460/pexels-photo-3704460.jpeg"
           onClick={() => setOpenModal(true)}
@@ -55,7 +55,7 @@ function Products() {
           </h6>
         </Card>
         <Card
-          className="max-w-[170px] product__monitor__products"
+          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           onClick={() => setOpenModal(true)}
@@ -68,7 +68,7 @@ function Products() {
           </h6>
         </Card>
         <Card
-          className="max-w-[170px] product__monitor__products"
+          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/8472184/pexels-photo-8472184.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           onClick={() => setOpenModal(true)}
@@ -81,7 +81,7 @@ function Products() {
           </h6>
         </Card>
         <Card
-          className="max-w-[170px] product__monitor__products"
+          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
           onClick={() => setOpenModal(true)}
@@ -94,7 +94,7 @@ function Products() {
           </h6>
         </Card>
         <Card
-          className="max-w-[170px] product__monitor__products"
+          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
           onClick={() => setOpenModal(true)}
@@ -107,7 +107,7 @@ function Products() {
           </h6>
         </Card>
         <Card
-          className="max-w-[170px] product__monitor__products"
+          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/911810/pexels-photo-911810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           onClick={() => setOpenModal(true)}
@@ -120,7 +120,7 @@ function Products() {
           </h6>
         </Card>
         <Card
-          className="max-w-[170px] product__monitor__products"
+          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/3704460/pexels-photo-3704460.jpeg"
           onClick={() => setOpenModal(true)}
@@ -133,7 +133,7 @@ function Products() {
           </h6>
         </Card>
         <Card
-          className="max-w-[170px] product__monitor__products"
+          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           onClick={() => setOpenModal(true)}
@@ -146,7 +146,7 @@ function Products() {
           </h6>
         </Card>
         <Card
-          className="max-w-[170px] product__monitor__products"
+          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/8472184/pexels-photo-8472184.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           onClick={() => setOpenModal(true)}
@@ -159,7 +159,7 @@ function Products() {
           </h6>
         </Card>
         <Card
-          className="max-w-[170px] product__monitor__products"
+          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
           onClick={() => setOpenModal(true)}
@@ -172,7 +172,7 @@ function Products() {
           </h6>
         </Card>
         <Card
-          className="max-w-[170px] product__monitor__products"
+          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
           imgSrc="https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           onClick={() => setOpenModal(true)}
         >

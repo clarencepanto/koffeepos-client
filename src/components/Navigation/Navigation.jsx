@@ -6,18 +6,21 @@ import {
   SidebarItem,
   SidebarItemGroup,
   SidebarItems,
+  Breadcrumb,
+  BreadcrumbItem,
 } from "flowbite-react";
 import { useState } from "react";
 import {
-  HiViewList,
   HiOutlineTruck,
   HiOutlineChartSquareBar,
   HiOutlineClipboard,
   HiDesktopComputer,
+  HiHome,
 } from "react-icons/hi";
 import { TiCoffee } from "react-icons/ti";
 
 function Navigation() {
+  // Change style for tab, desktop sidebar
   const customTheme = createTheme({
     sidebar: {
       root: {
@@ -31,6 +34,24 @@ function Navigation() {
       },
     },
   });
+  // mobile theme
+  const customThemeMobile = createTheme({
+    breadcrumb: {
+      root: {
+        base: "",
+        list: "flex items-center",
+      },
+      item: {
+        base: "group flex items-center",
+        chevron: "mx-1 h-4 w-4 text-[#4b2e2b] group-first:hidden md:mx-2",
+        href: {
+          off: "flex items-center text-[10px]  font-medium text-gray-500 dark:text-[#4b2e2b]",
+          on: "flex items-center text-[10px]  font-medium text-gray-700 hover:text-gray-900 dark:text-[#4b2e2b] dark:hover:text-white",
+        },
+        icon: "mr-2 h-4 w-4",
+      },
+    },
+  });
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -40,9 +61,7 @@ function Navigation() {
         <button
           className="block md:hidden"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        >
-          <HiViewList />
-        </button>
+        ></button>
         <TitleNav />
       </div>
       <ThemeProvider theme={customTheme}>
@@ -102,45 +121,20 @@ function Navigation() {
             </SidebarItemGroup>
           </SidebarItems>
         </Sidebar>
+      </ThemeProvider>
 
-        {/* mobile hamburger menu */}
-        {isSidebarOpen && (
-          <Sidebar className="h-screen block md:hidden max-w-2/4">
-            <h1 className="sidebar__title">WELCOME MANAGER</h1>
-            <SidebarItems>
-              <SidebarItemGroup>
-                <SidebarItem
-                  className="sidebar__item"
-                  href="/products"
-                  icon={TiCoffee}
-                >
-                  Products
-                </SidebarItem>
-                <SidebarItem
-                  className="sidebar__item"
-                  href="/ingredients"
-                  icon={HiOutlineClipboard}
-                >
-                  Ingredients
-                </SidebarItem>
-                <SidebarItem
-                  className="sidebar__item"
-                  href="/summarytable"
-                  icon={HiOutlineChartSquareBar}
-                >
-                  Summary
-                </SidebarItem>
-                <SidebarItem
-                  className="sidebar__item"
-                  href="/suppliers"
-                  icon={HiOutlineTruck}
-                >
-                  Order Supplies
-                </SidebarItem>
-              </SidebarItemGroup>
-            </SidebarItems>
-          </Sidebar>
-        )}
+      {/* mobile nav */}
+      <ThemeProvider theme={customThemeMobile}>
+        <Breadcrumb
+          aria-label="Default breadcrumb example"
+          className="bg-[#D2B48C] h-[20px] pl-11 "
+        >
+          <BreadcrumbItem href="/products">Products</BreadcrumbItem>
+          <BreadcrumbItem href="/ingredients">Ingredients</BreadcrumbItem>
+          <BreadcrumbItem href="/summarytable">Summary</BreadcrumbItem>
+          <BreadcrumbItem href="/supplier">Order</BreadcrumbItem>
+          <BreadcrumbItem href="/">Logout</BreadcrumbItem>
+        </Breadcrumb>
       </ThemeProvider>
     </>
   );

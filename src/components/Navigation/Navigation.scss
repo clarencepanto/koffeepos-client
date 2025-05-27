@@ -3,6 +3,13 @@
 @use "../../styles/partials/fonts" as *;
 
 html {
+  background: url("../../assets/images/pexels-emrecan-2079438.jpg") no-repeat
+    top center/cover;
+  @include tablet {
+    background: url("../../assets/images/pexels-emrecan-2079438.jpg") no-repeat
+      top center/cover;
+    overflow-y: hidden;
+  }
   @include desktop {
     background: url("../../assets/images/pexels-emrecan-2079438.jpg") no-repeat
       top center/cover;
