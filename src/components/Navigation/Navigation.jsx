@@ -109,26 +109,30 @@ function Navigation() {
             <h1 className="sidebar__title">WELCOME MANAGER</h1>
             <SidebarItems>
               <SidebarItemGroup>
-                <SidebarItem className="sidebar__item" href="#" icon={TiCoffee}>
+                <SidebarItem
+                  className="sidebar__item"
+                  href="/products"
+                  icon={TiCoffee}
+                >
                   Products
                 </SidebarItem>
                 <SidebarItem
                   className="sidebar__item"
-                  href="#"
+                  href="/ingredients"
                   icon={HiOutlineClipboard}
                 >
                   Ingredients
                 </SidebarItem>
                 <SidebarItem
                   className="sidebar__item"
-                  href="#"
+                  href="/summarytable"
                   icon={HiOutlineChartSquareBar}
                 >
                   Summary
                 </SidebarItem>
                 <SidebarItem
                   className="sidebar__item"
-                  href="#"
+                  href="/suppliers"
                   icon={HiOutlineTruck}
                 >
                   Order Supplies

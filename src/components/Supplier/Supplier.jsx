@@ -25,8 +25,8 @@ function Supplier() {
   return (
     <div>
       <Navigation />
-      <section className="absolute max-h-160 top-18 right-64 overflow-y-scroll ">
-        <Table className="min-w-192 table-auto">
+      <section className="absolute max-h-160 top-18 right-73 overflow-y-scroll ">
+        <Table className="min-w-175 table-auto">
           <TableHead className="sticky top-0">
             <TableRow>
               <TableHeadCell>Ingredient Name</TableHeadCell>

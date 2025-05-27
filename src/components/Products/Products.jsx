@@ -14,9 +14,9 @@ function Products() {
   return (
     <div>
       <Navigation />
-      <section className="bg-[#f5ecd5]/6 backdrop-blur-sm  border-white/20 rounded-xl hidden md:block min-w-245 box-border h-[80%] overflow-y-scroll product__monitor">
+      <section className="bg-[#f5ecd5]/6 backdrop-blur-sm  border-white/20 rounded-xl   md:block lg:max-w-200  h-[80%] overflow-y-scroll product__monitor">
         <Card
-          className="max-w-[170px] product__monitor__products"
+          className="w-25 h-50 lg:h-61 lg:w-[150px]  product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
           onClick={() => setOpenModal(true)}
