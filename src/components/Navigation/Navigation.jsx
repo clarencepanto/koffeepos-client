@@ -127,7 +127,7 @@ function Navigation() {
       <ThemeProvider theme={customThemeMobile}>
         <Breadcrumb
           aria-label="Default breadcrumb example"
-          className="bg-[#D2B48C] h-[20px] pl-11 "
+          className="bg-[#D2B48C] h-[20px] pl-2 "
         >
           <BreadcrumbItem href="/products">Products</BreadcrumbItem>
           <BreadcrumbItem href="/ingredients">Ingredients</BreadcrumbItem>

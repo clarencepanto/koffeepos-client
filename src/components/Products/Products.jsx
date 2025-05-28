@@ -14,169 +14,135 @@ function Products() {
   return (
     <div>
       <Navigation />
-      <section className="bg-[#f5ecd5]/6 backdrop-blur-sm  border-white/20 rounded-xl flex flex-wrap  md:block lg:max-w-450  h-[80%] overflow-y-scroll product__monitor">
+      <section className="bg-[#f5ecd5]/6 backdrop-blur-sm  border-white/20 rounded-xl overflow-y-scroll product__monitor">
         <Card
-          className="lg:max-w-[170px] md:h-[220px] max-w-50  product__monitor__products  "
+          className="  product__monitor__products  "
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
           onClick={() => setOpenModal(true)}
         >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
+          <h5 className=" text-md font-bold tracking-tight dark:text-white">
             Espresso
           </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Available: 10
-          </h6>
+          <h6 className=" dark:text-white font-bold ">Available: 10</h6>
         </Card>
         <Card
-          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
+          className=" product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/911810/pexels-photo-911810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           onClick={() => setOpenModal(true)}
         >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
+          <h5 className=" text-md font-bold tracking-tight dark:text-white">
             Matcha Latte
           </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Available: 7
-          </h6>
+          <h6 className=" dark:text-white font-bold ">Available: 7</h6>
         </Card>
         <Card
-          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
+          className=" product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/3704460/pexels-photo-3704460.jpeg"
           onClick={() => setOpenModal(true)}
         >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
+          <h5 className=" text-md font-bold tracking-tight dark:text-white">
             Americano
           </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Available: 20
-          </h6>
+          <h6 className=" dark:text-white font-bold ">Available: 20</h6>
         </Card>
         <Card
-          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
+          className=" product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           onClick={() => setOpenModal(true)}
         >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
+          <h5 className=" text-md font-bold tracking-tight dark:text-white">
             Cappuccino
           </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Available: 10
-          </h6>
+          <h6 className=" dark:text-white font-bold ">Available: 10</h6>
         </Card>
         <Card
-          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
+          className=" product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/8472184/pexels-photo-8472184.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           onClick={() => setOpenModal(true)}
         >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
+          <h5 className=" text-md font-bold tracking-tight dark:text-white">
             Flat White
           </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Available: 2
-          </h6>
+          <h6 className=" dark:text-white font-bold ">Available: 2</h6>
         </Card>
         <Card
-          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
+          className=" product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
           onClick={() => setOpenModal(true)}
         >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
+          <h5 className=" text-md font-bold tracking-tight dark:text-white">
             Espresso
           </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Available: 25
-          </h6>
+          <h6 className=" dark:text-white font-bold ">Available: 25</h6>
         </Card>
         <Card
-          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
+          className=" product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
           onClick={() => setOpenModal(true)}
         >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
+          <h5 className=" text-md font-bold tracking-tight dark:text-white">
             Espresso
           </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Available: 10
-          </h6>
+          <h6 className=" dark:text-white font-bold ">Available: 10</h6>
         </Card>
         <Card
-          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
-          imgAlt="Meaningful alt text for an image that is not purely decorative"
-          imgSrc="https://images.pexels.com/photos/911810/pexels-photo-911810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          onClick={() => setOpenModal(true)}
-        >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
-            Matcha Latte
-          </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Available: 7
-          </h6>
-        </Card>
-        <Card
-          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
-          imgAlt="Meaningful alt text for an image that is not purely decorative"
-          imgSrc="https://images.pexels.com/photos/3704460/pexels-photo-3704460.jpeg"
-          onClick={() => setOpenModal(true)}
-        >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
-            Americano
-          </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Available: 20
-          </h6>
-        </Card>
-        <Card
-          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
-          imgAlt="Meaningful alt text for an image that is not purely decorative"
-          imgSrc="https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          onClick={() => setOpenModal(true)}
-        >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
-            Cappuccino
-          </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Available: 10
-          </h6>
-        </Card>
-        <Card
-          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
-          imgAlt="Meaningful alt text for an image that is not purely decorative"
-          imgSrc="https://images.pexels.com/photos/8472184/pexels-photo-8472184.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          onClick={() => setOpenModal(true)}
-        >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
-            Flat White
-          </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Available: 2
-          </h6>
-        </Card>
-        <Card
-          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
+          className=" product__monitor__products"
           imgAlt="Meaningful alt text for an image that is not purely decorative"
           imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
           onClick={() => setOpenModal(true)}
         >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
+          <h5 className=" text-md font-bold tracking-tight dark:text-white">
             Espresso
           </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Available: 25
-          </h6>
+          <h6 className=" dark:text-white font-bold ">Available: 10</h6>
         </Card>
         <Card
-          className="lg:max-w-[170px] md:h-[220px] max-w-50 product__monitor__products"
+          className=" product__monitor__products"
+          imgAlt="Meaningful alt text for an image that is not purely decorative"
+          imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
+          onClick={() => setOpenModal(true)}
+        >
+          <h5 className=" text-md font-bold tracking-tight dark:text-white">
+            Espresso
+          </h5>
+          <h6 className=" dark:text-white font-bold ">Available: 10</h6>
+        </Card>
+        <Card
+          className=" product__monitor__products"
+          imgAlt="Meaningful alt text for an image that is not purely decorative"
+          imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
+          onClick={() => setOpenModal(true)}
+        >
+          <h5 className=" text-md font-bold tracking-tight dark:text-white">
+            Espresso
+          </h5>
+          <h6 className=" dark:text-white font-bold ">Available: 10</h6>
+        </Card>
+        <Card
+          className=" product__monitor__products"
+          imgAlt="Meaningful alt text for an image that is not purely decorative"
+          imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
+          onClick={() => setOpenModal(true)}
+        >
+          <h5 className=" text-md font-bold tracking-tight dark:text-white">
+            Espresso
+          </h5>
+          <h6 className=" dark:text-white font-bold ">Available: 10</h6>
+        </Card>
+
+        <Card
+          className=" product__monitor__products"
           imgSrc="https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           onClick={() => setOpenModal(true)}
         >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
+          <h5 className=" text-md font-bold tracking-tight dark:text-white">
             Create Product
           </h5>
         </Card>
@@ -188,8 +154,8 @@ function Products() {
         show={openModal}
         onClose={() => setOpenModal(false)}
       >
-        <ModalHeader>How To Make</ModalHeader>
-        <ModalBody className="flex">
+        <ModalHeader className="modal-header">How To Make</ModalHeader>
+        <ModalBody className="flex product__modal__body">
           <section className="text-white">
             <h2 className="text-3xl pb-5">Americano</h2>
             <article>20ml Milk</article>
@@ -201,7 +167,6 @@ function Products() {
             <article>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Doloremque obcaecati libero, quisquam voluptates tenetur
-              laudantium, tempora magni similique recusandae optio fugiat
             </article>
           </section>
         </ModalBody>
