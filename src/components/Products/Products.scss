@@ -33,6 +33,9 @@
     width: 90px;
     height: 145px;
 
+    @media (max-width: 375px) {
+      height: 135px;
+    }
     @include tablet {
       font-size: 0.8rem;
       min-width: 150px;
