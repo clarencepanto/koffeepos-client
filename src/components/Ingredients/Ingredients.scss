@@ -47,7 +47,7 @@
 }
 
 .table-cont-mobile {
-  min-width: 375px;
+  width: 100vw;
 
   @include tablet {
     display: none;
