@@ -3,9 +3,6 @@
 @use "../../styles/partials/fonts" as *;
 
 .pos-container {
-  @include tablet {
-    display: flex;
-  }
   @include desktop {
     display: flex;
     position: relative;
@@ -18,7 +15,11 @@
       position: absolute;
       top: 4.3rem;
       left: 17rem;
-      background-color: #d2b48c;
+      background-color: $koffeepos-mocha;
+    }
+
+    @media (min-width: 1920px) {
+      min-width: 1300px;
     }
 
     &__category {
@@ -45,6 +46,10 @@
       align-items: flex-start;
     }
 
+    @media (min-width: 1920px) {
+      width: 1300px;
+    }
+
     &__product {
       @include desktop {
         margin: 0.9rem;
@@ -65,17 +70,28 @@
       position: absolute;
       top: 3.4rem;
       left: 64rem;
-      background-color: #d2b48c;
+      background-color: $koffeepos-mocha;
+    }
+
+    @media (min-width: 1920px) {
+      left: 98.5rem;
+      width: 340px;
+      height: 600px;
     }
 
     &__monitor {
       @include desktop {
         bottom: 0.1rem;
       }
+
+      @media (min-width: 1920px) {
+        height: 920px;
+      }
+
       &__table-head {
         @include desktop {
           border-radius: 0;
-          background-color: #d2b48c;
+          background-color: $koffeepos-mocha;
           color: $koffeepos-darkmocha;
           font-family: $roboto;
           font-weight: 500;
@@ -85,7 +101,7 @@
       &__table-data {
         @include desktop {
           border-radius: 0;
-          background-color: #d2b48c;
+          background-color: $koffeepos-mocha;
           color: $koffeepos-darkmocha;
           font-family: $roboto;
         }
@@ -95,5 +111,9 @@
 
   &__checkout {
     min-width: 256px;
+
+    @media (min-width: 1920px) {
+      min-width: 325px;
+    }
   }
 }

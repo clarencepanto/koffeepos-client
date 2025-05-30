@@ -29,7 +29,7 @@ function PointOfSale() {
         <Navigation className="nav-modify" />
       </nav>
 
-      <section className="flex justify-around items-center w-[57.8%] rounded-lg h-[6%] pos__categories-selection">
+      <section className="flex justify-around items-center  rounded-lg h-[6%] pos__categories-selection">
         <h2 className="rounded-lg pos__categories-selection__category">
           Coffee
         </h2>
@@ -198,8 +198,8 @@ function PointOfSale() {
       </Modal>
 
       {/* cart */}
-      <section className="h-[95%] w-[20%] pos__cart-container pos__cart">
-        <div className=" max-h-150 overflow-y-auto pos__cart__monitor">
+      <section className=" pos__cart-container pos__cart">
+        <div className=" overflow-y-auto pos__cart__monitor">
           <Table className="min-w-full table-auto mb-20">
             <TableHead className="sticky top-0">
               <TableRow>
@@ -286,6 +286,102 @@ function PointOfSale() {
               </TableRow>
               <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
                 <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                  Cappuccino 3x
+                </TableCell>
+                <TableCell className="pos__cart__monitor__table-data">
+                  $6.50
+                </TableCell>
+              </TableRow>
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
                   Flat White 1x
                 </TableCell>
                 <TableCell className="pos__cart__monitor__table-data">
@@ -298,12 +394,12 @@ function PointOfSale() {
       </section>
 
       {/* checkout price  */}
-      <section className="absolute right-0 bottom-0 pos__checkout">
+      <section className="absolute left-394 bottom-10 pos__checkout">
         <Card
           href="#"
           className=" max-w-sm rounded-none pos__checkout__taxscreen"
         >
-          <div className="flex justify-between">
+          <div className="flex justify-around">
             <h5 className="text-8px font-bold tracking-tight  dark:text-white">
               Tax:
             </h5>
@@ -311,7 +407,7 @@ function PointOfSale() {
               $22.50
             </h5>
           </div>
-          <div className="flex justify-between relative h-30 ">
+          <div className="flex justify-around relative h-30 ">
             <h5 className="text-xl font-bold tracking-tight  dark:text-white">
               Total Price:
             </h5>
