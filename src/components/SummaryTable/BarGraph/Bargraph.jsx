@@ -1,5 +1,6 @@
 import { Card, CardBody, CardHeader } from "@material-tailwind/react";
 import Chart from "react-apexcharts";
+import "./Bargraph.scss";
 
 function Bargraph() {
   const chartConfig = {
@@ -40,7 +41,7 @@ function Bargraph() {
         labels: {
           style: {
             colors: "#616161",
-            fontSize: "12px",
+            fontSize: "15px",
             fontFamily: "inherit",
             fontWeight: 400,
           },
@@ -61,7 +62,7 @@ function Bargraph() {
         labels: {
           style: {
             colors: "#616161",
-            fontSize: "12px",
+            fontSize: "15px",
             fontFamily: "inherit",
             fontWeight: 400,
           },
@@ -92,12 +93,12 @@ function Bargraph() {
 
   return (
     <div>
-      <Card className="min-w-150 bg-[#d2b48c]  ">
+      <Card className=" bg-[#d2b48c] bargraph">
         <CardHeader
           floated={false}
           shadow={false}
           color="transparent"
-          className="flex flex-col gap-4 rounded-none md:flex-row md:items-center justify-center text-4xl"
+          className="flex flex-col gap-4 rounded-none text-center bargraph__title "
         >
           Most Ordered Items Today
         </CardHeader>

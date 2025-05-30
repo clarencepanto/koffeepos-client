@@ -3,12 +3,101 @@
 @use "../../styles/partials/fonts" as *;
 
 .summarytable__monitor {
+  position: absolute;
+  margin: 0.5rem auto;
+  max-width: 100vw;
+  height: 90vh;
+  padding: 2rem;
+
+  @include tablet {
+    position: absolute;
+    margin: 0.5rem auto;
+    max-width: 500px;
+    height: 90vh;
+    padding: 2rem;
+    top: 4rem;
+    left: 16.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 755px;
+  }
+
   @include desktop {
+    max-width: 1280px;
     position: absolute;
     top: 6rem;
     left: 16rem;
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
   }
+
+  @media (min-width: 1920px) {
+    max-width: 1920px;
+
+    margin-left: 3rem;
+  }
+
+  &__content {
+    max-width: 400px;
+    margin: 0.8rem auto;
+    text-align: center;
+
+    h5 {
+      font-size: 1.2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    @include tablet {
+      max-width: 600px;
+
+      h5 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      min-width: 700px;
+      min-height: 250px;
+
+      h5 {
+        font-size: 3.5rem;
+      }
+
+      p {
+        font-size: 2.9rem;
+      }
+    }
+
+    @include desktop {
+      min-width: 960px;
+      min-height: 250px;
+
+      h5 {
+        font-size: 3.5rem;
+      }
+
+      p {
+        font-size: 2.9rem;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      min-width: 1130px;
+    }
+    @media (min-width: 1920px) {
+      min-width: 1500px;
+    }
+  }
+}
+
+.summarytable__modal {
+  margin: auto;
 }
