@@ -420,7 +420,7 @@ function PointOfSale() {
 
       {/* Buy now */}
 
-      <section className="absolute right-19 bottom-15">
+      <section className="absolute right-30 bottom-20">
         <Button onClick={() => setOpenModalCheckout(true)}>Checkout</Button>
         <Modal
           show={openModalCheckout}

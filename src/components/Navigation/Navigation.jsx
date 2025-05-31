@@ -15,7 +15,8 @@ import {
   HiOutlineChartSquareBar,
   HiOutlineClipboard,
   HiDesktopComputer,
-  HiHome,
+  HiLogout,
+  HiOutlineUserGroup,
 } from "react-icons/hi";
 import { TiCoffee } from "react-icons/ti";
 
@@ -107,14 +108,14 @@ function Navigation() {
               <SidebarItem
                 className="sidebar__item"
                 href="/theusuals"
-                icon={HiOutlineTruck}
+                icon={HiOutlineUserGroup}
               >
                 The Usuals
               </SidebarItem>
               <SidebarItem
                 className="sidebar__item"
                 href="/logout"
-                icon={HiOutlineTruck}
+                icon={HiLogout}
               >
                 Logout
               </SidebarItem>
