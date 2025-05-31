@@ -1,40 +1,48 @@
 import "./Supplier.scss";
 import Navigation from "../Navigation/Navigation";
 import {
+  Card,
+  Button,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeadCell,
   TableRow,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  Button,
-  Label,
-  TextInput,
-  Select,
-  Card,
 } from "flowbite-react";
+import { HiShoppingCart } from "react-icons/hi";
 import { useState } from "react";
 
 function Supplier() {
   const [openModal, setOpenModal] = useState(false);
-  const [openModalCheckout, setOpenModalCheckout] = useState(false);
   return (
     <div>
       <Navigation />
-      <section className="absolute max-h-160 top-18 right-73 overflow-y-scroll ">
-        <Table className="min-w-175 table-auto">
+
+      <HiShoppingCart
+        className="text-3xl shopping__cart "
+        onClick={() => setOpenModal(true)}
+      />
+
+      <section className="ingredients-table-supplier">
+        {/* ingredient orders mobile*/}
+        <Table className="table-auto table-cont-mobile-supplier ">
           <TableHead className="sticky top-0">
             <TableRow>
-              <TableHeadCell>Ingredient Name</TableHeadCell>
-              <TableHeadCell>Stock</TableHeadCell>
-              <TableHeadCell>Supplier Name</TableHeadCell>
-              <TableHeadCell>Price</TableHeadCell>
+              <TableHeadCell className="supplier-header">
+                Ingredient Name
+              </TableHeadCell>
+              <TableHeadCell className="supplier-header">
+                Quantity
+              </TableHeadCell>
+              <TableHeadCell className="supplier-header">Price</TableHeadCell>
+
               <TableHeadCell>
-                <span className="sr-only">Edit</span>
+                <span className="sr-only">Add</span>
               </TableHeadCell>
             </TableRow>
           </TableHead>
@@ -44,13 +52,25 @@ function Supplier() {
                 Sugar
               </TableCell>
               <TableCell>100 gm</TableCell>
-              <TableCell>Wyatt Co</TableCell>
-              <TableCell>400</TableCell>
+              <TableCell>$21</TableCell>
               <TableCell>
                 <a
                   className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
                   onClick={() => setOpenModal(true)}
                 >
+                  Add
+                </a>
+              </TableCell>
+            </TableRow>
+            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                Milk
+              </TableCell>
+              <TableCell>1000 ml</TableCell>
+              <TableCell>$21</TableCell>
+
+              <TableCell>
+                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                   Add
                 </a>
               </TableCell>
@@ -59,14 +79,10 @@ function Supplier() {
               <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                 Coffee Beans
               </TableCell>
-              <TableCell>100 gm</TableCell>
-              <TableCell>Wyatt Co</TableCell>
-              <TableCell>300</TableCell>
+              <TableCell>200 gm</TableCell>
+              <TableCell>$21</TableCell>
               <TableCell>
-                <a
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                  onClick={() => setOpenModal(true)}
-                >
+                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                   Add
                 </a>
               </TableCell>
@@ -75,174 +91,49 @@ function Supplier() {
               <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                 Matcha Powder
               </TableCell>
+              <TableCell>25 gm</TableCell>
+              <TableCell>$21</TableCell>
+
+              <TableCell>
+                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                  Add
+                </a>
+              </TableCell>
+            </TableRow>
+            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                Cocoa Powder
+              </TableCell>
+              <TableCell>10 gm</TableCell>
+              <TableCell>$21</TableCell>
+
+              <TableCell>
+                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                  Add
+                </a>
+              </TableCell>
+            </TableRow>
+            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                Sugar
+              </TableCell>
               <TableCell>100 gm</TableCell>
-              <TableCell>Wyatt Co</TableCell>
-              <TableCell>500</TableCell>
+              <TableCell>$21</TableCell>
+
               <TableCell>
-                <a
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                  onClick={() => setOpenModal(true)}
-                >
+                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                   Add
                 </a>
               </TableCell>
             </TableRow>
             <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
               <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Chai Powder
-              </TableCell>
-              <TableCell>200 gm</TableCell>
-              <TableCell>Wyatt Co</TableCell>
-              <TableCell>400</TableCell>
-              <TableCell>
-                <a
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                  onClick={() => setOpenModal(true)}
-                >
-                  Add
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Oat Milk
+                Milk
               </TableCell>
               <TableCell>1000 ml</TableCell>
-              <TableCell>Wyatt Co</TableCell>
-              <TableCell>600</TableCell>
+              <TableCell>$21</TableCell>
               <TableCell>
-                <a
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                  onClick={() => setOpenModal(true)}
-                >
-                  Add
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Chocolate Chip
-              </TableCell>
-              <TableCell>50 gm</TableCell>
-              <TableCell>Nordel Co</TableCell>
-              <TableCell>100</TableCell>
-              <TableCell>
-                <a
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                  onClick={() => setOpenModal(true)}
-                >
-                  Add
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Maple Syrup
-              </TableCell>
-              <TableCell>500 ml</TableCell>
-              <TableCell>SideSoul Co</TableCell>
-              <TableCell>40</TableCell>
-              <TableCell>
-                <a
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                  onClick={() => setOpenModal(true)}
-                >
-                  Add
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Sugar
-              </TableCell>
-              <TableCell>100 gm</TableCell>
-              <TableCell>Wyatt Co</TableCell>
-              <TableCell>400</TableCell>
-              <TableCell>
-                <a
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                  onClick={() => setOpenModal(true)}
-                >
-                  Add
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Sugar
-              </TableCell>
-              <TableCell>100 gm</TableCell>
-              <TableCell>Wyatt Co</TableCell>
-              <TableCell>400</TableCell>
-              <TableCell>
-                <a
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                  onClick={() => setOpenModal(true)}
-                >
-                  Add
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Sugar
-              </TableCell>
-              <TableCell>100 gm</TableCell>
-              <TableCell>Wyatt Co</TableCell>
-              <TableCell>400</TableCell>
-              <TableCell>
-                <a
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                  onClick={() => setOpenModal(true)}
-                >
-                  Add
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Sugar
-              </TableCell>
-              <TableCell>100 gm</TableCell>
-              <TableCell>Wyatt Co</TableCell>
-              <TableCell>400</TableCell>
-              <TableCell>
-                <a
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                  onClick={() => setOpenModal(true)}
-                >
-                  Add
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Sugar
-              </TableCell>
-              <TableCell>100 gm</TableCell>
-              <TableCell>Wyatt Co</TableCell>
-              <TableCell>400</TableCell>
-              <TableCell>
-                <a
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                  onClick={() => setOpenModal(true)}
-                >
-                  Add
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Sugar
-              </TableCell>
-              <TableCell>100 gm</TableCell>
-              <TableCell>Wyatt Co</TableCell>
-              <TableCell>400</TableCell>
-              <TableCell>
-                <a
-                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                  onClick={() => setOpenModal(true)}
-                >
+                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                   Add
                 </a>
               </TableCell>
@@ -250,212 +141,297 @@ function Supplier() {
           </TableBody>
         </Table>
 
-        {/* Modal */}
-        <Modal show={openModal} onClose={() => setOpenModal(false)}>
-          <ModalHeader>Confirm Order</ModalHeader>
-          <ModalBody className="max-w-120">
-            <div className="space-y-6">
-              <div className="flex max-w-lg gap-15">
-                <div>
-                  <div className="mb-2 block">
-                    <Label htmlFor="order">Order</Label>
-                  </div>
-                  <TextInput
-                    id="order"
-                    type="number"
-                    sizing="md"
-                    className="max-w-30"
-                  />
-                </div>
-                <div>
-                  <div className="mb-2 block">
-                    <Label htmlFor="mpassword">Manager Password</Label>
-                  </div>
-                  <TextInput
-                    id="mpassword"
-                    type="password"
-                    sizing="md"
-                    className="max-w-30"
-                  />
-                </div>
+        {/* tablet /desktop table supplies */}
+
+        <Table className="table-auto table-cont-supplier">
+          <TableHead className="sticky top-0">
+            <TableRow>
+              <TableHeadCell className="supplier-header">
+                Ingredient Name
+              </TableHeadCell>
+              <TableHeadCell className="supplier-header">
+                Quantity
+              </TableHeadCell>
+              <TableHeadCell className="supplier-header">Price</TableHeadCell>
+
+              <TableHeadCell>
+                <span className="sr-only">Add</span>
+              </TableHeadCell>
+            </TableRow>
+          </TableHead>
+          <TableBody className="divide-y">
+            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                Sugar
+              </TableCell>
+              <TableCell>100 gm</TableCell>
+              <TableCell>$21</TableCell>
+              <TableCell>
+                <a
+                  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
+                  onClick={() => setOpenModal(true)}
+                >
+                  Add
+                </a>
+              </TableCell>
+            </TableRow>
+            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                Milk
+              </TableCell>
+              <TableCell>1000 ml</TableCell>
+              <TableCell>$21</TableCell>
+
+              <TableCell>
+                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                  Add
+                </a>
+              </TableCell>
+            </TableRow>
+            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                Coffee Beans
+              </TableCell>
+              <TableCell>200 gm</TableCell>
+              <TableCell>$21</TableCell>
+              <TableCell>
+                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                  Add
+                </a>
+              </TableCell>
+            </TableRow>
+            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                Matcha Powder
+              </TableCell>
+              <TableCell>25 gm</TableCell>
+              <TableCell>$21</TableCell>
+
+              <TableCell>
+                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                  Add
+                </a>
+              </TableCell>
+            </TableRow>
+            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                Cocoa Powder
+              </TableCell>
+              <TableCell>10 gm</TableCell>
+              <TableCell>$21</TableCell>
+
+              <TableCell>
+                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                  Add
+                </a>
+              </TableCell>
+            </TableRow>
+            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                Sugar
+              </TableCell>
+              <TableCell>100 gm</TableCell>
+              <TableCell>$21</TableCell>
+
+              <TableCell>
+                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                  Add
+                </a>
+              </TableCell>
+            </TableRow>
+            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                Milk
+              </TableCell>
+              <TableCell>1000 ml</TableCell>
+              <TableCell>$21</TableCell>
+              <TableCell>
+                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                  Add
+                </a>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </section>
+
+      <Modal show={openModal} onClose={() => setOpenModal(false)}>
+        <ModalHeader>Supplier Order</ModalHeader>
+        <ModalBody className="overflow-y-hidden">
+          <div className="space-y-6">
+            {/* cart */}
+            <section>
+              <div className=" overflow-y-auto overflow-x-hidden table__shopping__supplier ">
+                <Table className="min-w-full table-auto mb-20 ">
+                  <TableHead className="sticky top-0">
+                    <TableRow>
+                      <TableHeadCell>Ingredient name</TableHeadCell>
+                      <TableHeadCell>Price</TableHeadCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody className="divide-y">
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Espresso 1x
+                      </TableCell>
+                      <TableCell>$2.5</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Matcha Latte 10x
+                      </TableCell>
+                      <TableCell>$6</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Americano 2x
+                      </TableCell>
+                      <TableCell>$7.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cortado 4x
+                      </TableCell>
+                      <TableCell>$8.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cortado 4x
+                      </TableCell>
+                      <TableCell>$8.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Flat White 1x
+                      </TableCell>
+                      <TableCell>$8.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cortado 4x
+                      </TableCell>
+                      <TableCell>$8.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Cappuccino 3x
+                      </TableCell>
+                      <TableCell>$6.50</TableCell>
+                    </TableRow>
+                    <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white ">
+                        Flat White 1x
+                      </TableCell>
+                      <TableCell>$8.50</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
               </div>
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={() => setOpenModal(false)}>Add Order</Button>
-            <Button color="gray" onClick={() => setOpenModal(false)}>
-              Cancel
-            </Button>
-          </ModalFooter>
-        </Modal>
-      </section>
-      {/* cart */}
-      <section className="h-[95%] w-[20%] pos__cart-container pos__cart">
-        <div className=" max-h-150 overflow-y-auto pos__cart__monitor">
-          <Table className="min-w-full table-auto mb-20">
-            <TableHead className="sticky top-0">
-              <TableRow>
-                <TableHeadCell className=" pos__cart__monitor__table-head">
-                  Ingredient Name
-                </TableHeadCell>
-                <TableHeadCell className="pos__cart__monitor__table-head">
-                  Price
-                </TableHeadCell>
-              </TableRow>
-            </TableHead>
-            <TableBody className="divide-y">
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Espresso 1x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $2.5
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Matcha Latte 10x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Americano 2x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $7.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cortado 4x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $8.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cortado 4x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $8.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Flat White 1x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $8.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cortado 4x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $8.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Flat White 1x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $8.50
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
-      </section>
-      {/* pricing */}
-      <section className="absolute right-0 bottom-0 pos__checkout">
-        <Card
-          href="#"
-          className=" max-w-sm rounded-none pos__checkout__taxscreen"
-        >
-          <div className="flex justify-between">
-            <h5 className="text-8px font-bold tracking-tight  dark:text-white">
-              Tax:
-            </h5>
-            <h5 className="text-8px font-bold tracking-tight  dark:text-white">
-              $22.50
-            </h5>
-          </div>
-          <div className="flex justify-between relative h-30 ">
-            <h5 className="text-xl font-bold tracking-tight  dark:text-white">
-              Total Price:
-            </h5>
-            <h5 className="text-xl font-bold tracking-tight  dark:text-white">
-              $44.50
-            </h5>
-          </div>
-        </Card>
-      </section>
-      {/* checkout button */}
-      <section className="absolute right-19 bottom-10">
-        <Button onClick={() => setOpenModalCheckout(true)}>Checkout</Button>
-        <Modal
-          show={openModalCheckout}
-          onClose={() => setOpenModalCheckout(false)}
-        >
-          <ModalHeader>Checkout</ModalHeader>
-          <ModalBody>
-            {/* Final summary of orders */}
-            <h2 className="text-white">Orders</h2>
-            <p className="text-white">Sugar 1x</p>
-            <p className="text-white">Cream 1x</p>
-            <p className="text-white">Coffee Beans 1x</p>
-            <p className="text-white">Milk 1x</p>
-            <p className="text-white">Matcha Latte 1x</p>
-            <p className="text-white">Chai Latte 1x</p>
-            <p className="text-white">Oat Milk 1x</p>
-            <p className="text-white">Dark Roast Beans 1x</p>
-            {/* select a payment option */}
-            <div className="space-y-6">
-              <div className="max-w-md pt-10">
-                <div className="mb-2 block">
-                  <Label htmlFor="payment-methods">
-                    Select the payment option
-                  </Label>
+            </section>
+
+            {/* checkout price  */}
+            <section>
+              <Card
+                href="#"
+                className=" max-w-sm  rounded-none checkout-supply"
+              >
+                <div className="flex justify-around relative ">
+                  <h5 className=" font-bold tracking-tight  dark:text-white checkout-product-price">
+                    Pay:
+                  </h5>
+                  <h5 className=" font-bold tracking-tight  dark:text-white checkout-product-price">
+                    $44.50
+                  </h5>
                 </div>
-                <Select id="payment-methods" required>
-                  <option>Mastercard</option>
-                  <option>Visa</option>
-                  <option>Amex</option>
-                  <option>Cash</option>
-                </Select>
-              </div>
-            </div>
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={() => setOpenModalCheckout(false)}>
-              Send Order
-            </Button>
-            <Button onClick={() => setOpenModalCheckout(false)}>Cancel</Button>
-          </ModalFooter>
-        </Modal>
-      </section>
+              </Card>
+            </section>
+          </div>
+        </ModalBody>
+        <ModalFooter>
+          <Button onClick={() => setOpenModal(false)}>Purchase</Button>
+          <Button color="gray" onClick={() => setOpenModal(false)}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 }

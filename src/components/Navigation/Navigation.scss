@@ -11,6 +11,7 @@ html {
     background: url("../../assets/images/pexels-emrecan-2079438.jpg") no-repeat
       top center/cover;
     overflow-y: hidden;
+    overflow-x: hidden;
   }
   @include desktop {
     background: url("../../assets/images/pexels-emrecan-2079438.jpg") no-repeat
