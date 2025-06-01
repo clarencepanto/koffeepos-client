@@ -1,4 +1,5 @@
 import "./PointOfSale.scss";
+import io from "socket.io-client";
 import {
   Card,
   Button,
@@ -20,12 +21,16 @@ import { useEffect, useState } from "react";
 import Navigation from "../Navigation/Navigation";
 import axios from "axios";
 
+// establish real time connection
+const socket = io("http://localhost:8080");
+
 function PointOfSale() {
   const [openModal, setOpenModal] = useState(false);
   const [openModalCheckout, setOpenModalCheckout] = useState(false);
   const [productArray, setProductArray] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState([]);
   const [confirmedProduct, setConfirmedProduct] = useState([]);
+  const [getCardId, setGetCardId] = useState(null);
+  const [getQuantity, setGetQuantity] = useState(1);
 
   // fetch product data
   useEffect(() => {
@@ -35,17 +40,43 @@ function PointOfSale() {
     };
 
     getProductData();
+
+    // Socket listener for real-time updates
+    socket.on("productUpdated", (updatedProduct) => {
+      setProductArray((prevProducts) =>
+        prevProducts.map((product) =>
+          product.id === updatedProduct.id ? updatedProduct : product
+        )
+      );
+    });
+
+    // Clean up on unmount
+    return () => {
+      socket.off("productUpdated");
+    };
   }, []);
 
-  // select a product
-  const handleSelectProduct = (item) => {
-    // takes the old clicked items and displays it with the new clicked item
-    setSelectedProduct((prev) => [...prev, item]);
+  // get id for patch request
+  const handleGetCardId = (getId) => {
+    setGetCardId(getId);
   };
 
-  // add product to cart
-  const handleAddProduct = () => {
-    setConfirmedProduct(selectedProduct);
+  // handle patch request
+  const updateProductQuantity = async () => {
+    try {
+      // update request
+      const response = await axios.patch(
+        `http://localhost:8080/products/${getCardId}`,
+        {
+          quantity: getQuantity,
+        }
+      );
+      console.log("updated quantity", response.data);
+      // update new quantity
+      setConfirmedProduct((prev) => [...prev, response.data]);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -77,7 +108,7 @@ function PointOfSale() {
               imgSrc={productdata.image_url}
               onClick={() => {
                 setOpenModal(true);
-                handleSelectProduct(productdata);
+                handleGetCardId(productdata.id);
               }}
               key={productdata.id}
             >
@@ -153,7 +184,9 @@ function PointOfSale() {
             <div className="flex max-w-md flex-col gap-2">
               <h5 className="dark:text-white pr-[5px] text-md">Quantity</h5>
               <input
-                type="text"
+                type="number"
+                value={getQuantity}
+                onChange={(e) => setGetQuantity(e.target.value)}
                 className="max-w-10 bg-white outline-blue-500"
               />
             </div>
@@ -163,7 +196,7 @@ function PointOfSale() {
           <Button
             onClick={() => {
               setOpenModal(false);
-              handleAddProduct();
+              updateProductQuantity();
             }}
           >
             Add
@@ -197,7 +230,7 @@ function PointOfSale() {
                       key={data.id}
                     >
                       <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                        {data.name} {}x
+                        {data.name} {data.quantity}x
                       </TableCell>
                       <TableCell className="pos__cart__monitor__table-data">
                         ${data.price}
