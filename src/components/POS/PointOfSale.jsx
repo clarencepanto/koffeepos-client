@@ -16,12 +16,37 @@ import {
   TableRow,
   Select,
 } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navigation from "../Navigation/Navigation";
+import axios from "axios";
 
 function PointOfSale() {
   const [openModal, setOpenModal] = useState(false);
   const [openModalCheckout, setOpenModalCheckout] = useState(false);
+  const [productArray, setProductArray] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState([]);
+  const [confirmedProduct, setConfirmedProduct] = useState([]);
+
+  // fetch product data
+  useEffect(() => {
+    const getProductData = async () => {
+      const response = await axios.get("http://localhost:8080/products");
+      setProductArray(response.data);
+    };
+
+    getProductData();
+  }, []);
+
+  // select a product
+  const handleSelectProduct = (item) => {
+    // takes the old clicked items and displays it with the new clicked item
+    setSelectedProduct((prev) => [...prev, item]);
+  };
+
+  // add product to cart
+  const handleAddProduct = () => {
+    setConfirmedProduct(selectedProduct);
+  };
 
   return (
     <div className="pos-container  pos">
@@ -41,85 +66,30 @@ function PointOfSale() {
           Beverages
         </h2>
       </section>
+
+      {/* iterates the product data to ui */}
       <section className="bg-[#f5ecd5]/6 backdrop-blur-sm border border-white/20 rounded-xl p-6 hidden md:block w-[57.8%] h-[72%] overflow-y-scroll pos__monitor">
-        <Card
-          className="max-w-[200px] pos__monitor__product"
-          imgAlt="Meaningful alt text for an image that is not purely decorative"
-          imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
-          onClick={() => setOpenModal(true)}
-        >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
-            Espresso
-          </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Price: $2.00 Available: 10
-          </h6>
-        </Card>
-        <Card
-          className="max-w-[200px] pos__monitor__product"
-          imgAlt="Meaningful alt text for an image that is not purely decorative"
-          imgSrc="https://images.pexels.com/photos/911810/pexels-photo-911810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          onClick={() => setOpenModal(true)}
-        >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
-            Matcha Latte
-          </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Price: $3.00 Available: 7
-          </h6>
-        </Card>
-        <Card
-          className="max-w-[200px] pos__monitor__product"
-          imgAlt="Meaningful alt text for an image that is not purely decorative"
-          imgSrc="https://images.pexels.com/photos/3704460/pexels-photo-3704460.jpeg"
-          onClick={() => setOpenModal(true)}
-        >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
-            Americano
-          </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Price: $2.50 Available: 20
-          </h6>
-        </Card>
-        <Card
-          className="max-w-[200px] pos__monitor__product"
-          imgAlt="Meaningful alt text for an image that is not purely decorative"
-          imgSrc="https://images.pexels.com/photos/2396220/pexels-photo-2396220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          onClick={() => setOpenModal(true)}
-        >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
-            Cappuccino
-          </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Price: $3.00 Available: 10
-          </h6>
-        </Card>
-        <Card
-          className="max-w-[200px] pos__monitor__product"
-          imgAlt="Meaningful alt text for an image that is not purely decorative"
-          imgSrc="https://images.pexels.com/photos/8472184/pexels-photo-8472184.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          onClick={() => setOpenModal(true)}
-        >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
-            Flat White
-          </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Price: $2.50 Available: 2
-          </h6>
-        </Card>
-        <Card
-          className="max-w-[200px] pos__monitor__product"
-          imgAlt="Meaningful alt text for an image that is not purely decorative"
-          imgSrc="https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg"
-          onClick={() => setOpenModal(true)}
-        >
-          <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
-            Espresso
-          </h5>
-          <h6 className="text-center dark:text-white font-bold ">
-            Price: $2.00 Available: 25
-          </h6>
-        </Card>
+        {productArray &&
+          productArray.map((productdata) => (
+            <Card
+              className="max-w-[200px] pos__monitor__product"
+              imgAlt="Meaningful alt text for an image that is not purely decorative"
+              imgSrc={productdata.image_url}
+              onClick={() => {
+                setOpenModal(true);
+                handleSelectProduct(productdata);
+              }}
+              key={productdata.id}
+            >
+              <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
+                {productdata.name}
+              </h5>
+              <h6 className="text-center dark:text-white font-bold ">
+                Price: ${productdata.price} Available:
+                {productdata.availability}
+              </h6>
+            </Card>
+          ))}
       </section>
       {/* Modal */}
 
@@ -128,7 +98,7 @@ function PointOfSale() {
         position="center"
         onClose={() => setOpenModal(false)}
       >
-        <ModalHeader>Get Coffee</ModalHeader>
+        <ModalHeader>Get Products</ModalHeader>
 
         <ModalBody>
           {/* drink sizes */}
@@ -190,7 +160,14 @@ function PointOfSale() {
           </section>
         </ModalBody>
         <ModalFooter>
-          <Button onClick={() => setOpenModal(false)}>Add</Button>
+          <Button
+            onClick={() => {
+              setOpenModal(false);
+              handleAddProduct();
+            }}
+          >
+            Add
+          </Button>
           <Button color="gray" onClick={() => setOpenModal(false)}>
             Cancel
           </Button>
@@ -212,182 +189,22 @@ function PointOfSale() {
               </TableRow>
             </TableHead>
             <TableBody className="divide-y">
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Espresso 1x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $2.5
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Matcha Latte 10x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Americano 2x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $7.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cortado 4x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $8.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cortado 4x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $8.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Flat White 1x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $8.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cortado 4x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $8.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Cappuccino 3x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $6.50
-                </TableCell>
-              </TableRow>
-              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                  Flat White 1x
-                </TableCell>
-                <TableCell className="pos__cart__monitor__table-data">
-                  $8.50
-                </TableCell>
-              </TableRow>
+              {confirmedProduct &&
+                confirmedProduct.map((data) => {
+                  return (
+                    <TableRow
+                      className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                      key={data.id}
+                    >
+                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                        {data.name} {}x
+                      </TableCell>
+                      <TableCell className="pos__cart__monitor__table-data">
+                        ${data.price}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         </div>
