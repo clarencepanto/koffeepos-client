@@ -33,20 +33,9 @@ function PointOfSale() {
   const [getQuantity, setGetQuantity] = useState(1);
   const [getNormalPrice, setGetNormalPrice] = useState(0);
   const [getFullPrice, setGetFullPrice] = useState(0);
+  const [getAvailableProducts, setGetAvailableProducts] = useState([]);
 
-  //  get regular price and tax price
-  useEffect(() => {
-    const regPrice = confirmedProduct.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-
-    const gstAdd = regPrice * 0.05;
-    const pstAdd = regPrice * 0.07;
-    const fullPrice = regPrice + gstAdd + pstAdd;
-    setGetNormalPrice(regPrice);
-    setGetFullPrice(fullPrice);
-  }, [confirmedProduct]);
+  console.log(getAvailableProducts);
 
   // fetch product data
   useEffect(() => {
@@ -95,6 +84,30 @@ function PointOfSale() {
     }
   };
 
+  //  get regular price and tax price
+  useEffect(() => {
+    const regPrice = confirmedProduct.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+
+    const gstAdd = regPrice * 0.05;
+    const pstAdd = regPrice * 0.07;
+    const fullPrice = regPrice + gstAdd + pstAdd;
+    setGetNormalPrice(regPrice);
+    setGetFullPrice(fullPrice);
+  }, [confirmedProduct]);
+
+  // get the info about product availability
+  useEffect(() => {
+    const getProductAvailabilityData = async () => {
+      const response = await axios.get("http://localhost:8080/recipes");
+      setGetAvailableProducts(response.data);
+    };
+
+    getProductAvailabilityData();
+  }, []);
+
   return (
     <div className="pos-container  pos">
       <nav className="flex-1">
@@ -117,26 +130,34 @@ function PointOfSale() {
       {/* iterates the product data to ui */}
       <section className="bg-[#f5ecd5]/6 backdrop-blur-sm border border-white/20 rounded-xl p-6 hidden md:block w-[57.8%] h-[72%] overflow-y-scroll pos__monitor">
         {productArray &&
-          productArray.map((productdata) => (
-            <Card
-              className="max-w-[200px] pos__monitor__product"
-              imgAlt="Meaningful alt text for an image that is not purely decorative"
-              imgSrc={productdata.image_url}
-              onClick={() => {
-                setOpenModal(true);
-                handleGetCardId(productdata.id);
-              }}
-              key={productdata.id}
-            >
-              <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
-                {productdata.name}
-              </h5>
-              <h6 className="text-center dark:text-white font-bold ">
-                Price: ${productdata.price} Available:
-                {productdata.availability}
-              </h6>
-            </Card>
-          ))}
+          productArray.map((productdata) => {
+            // Find matching recipe availability
+            const availableInfo = getAvailableProducts.find(
+              (item) => item.id === productdata.id
+            );
+
+            const availableStock = availableInfo ? availableInfo.available : 0;
+            return (
+              <Card
+                className="max-w-[200px] pos__monitor__product"
+                imgAlt="Meaningful alt text for an image that is not purely decorative"
+                imgSrc={productdata.image_url}
+                onClick={() => {
+                  setOpenModal(true);
+                  handleGetCardId(productdata.id);
+                }}
+                key={productdata.id}
+              >
+                <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
+                  {productdata.name}
+                </h5>
+                <h6 className="text-center dark:text-white font-bold ">
+                  Price: ${productdata.price} Available: {availableStock}
+                  {productdata.availability}
+                </h6>
+              </Card>
+            );
+          })}
       </section>
       {/* Modal */}
 
