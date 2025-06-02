@@ -31,6 +31,22 @@ function PointOfSale() {
   const [confirmedProduct, setConfirmedProduct] = useState([]);
   const [getCardId, setGetCardId] = useState(null);
   const [getQuantity, setGetQuantity] = useState(1);
+  const [getNormalPrice, setGetNormalPrice] = useState(0);
+  const [getFullPrice, setGetFullPrice] = useState(0);
+
+  //  get regular price and tax price
+  useEffect(() => {
+    const regPrice = confirmedProduct.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+
+    const gstAdd = regPrice * 0.05;
+    const pstAdd = regPrice * 0.07;
+    const fullPrice = regPrice + gstAdd + pstAdd;
+    setGetNormalPrice(regPrice);
+    setGetFullPrice(fullPrice);
+  }, [confirmedProduct]);
 
   // fetch product data
   useEffect(() => {
@@ -224,6 +240,8 @@ function PointOfSale() {
             <TableBody className="divide-y">
               {confirmedProduct &&
                 confirmedProduct.map((data) => {
+                  const normalPrice = data.price * data.quantity;
+
                   return (
                     <TableRow
                       className="bg-white dark:border-gray-700 dark:bg-gray-800"
@@ -233,7 +251,7 @@ function PointOfSale() {
                         {data.name} {data.quantity}x
                       </TableCell>
                       <TableCell className="pos__cart__monitor__table-data">
-                        ${data.price}
+                        ${normalPrice}
                       </TableCell>
                     </TableRow>
                   );
@@ -251,10 +269,10 @@ function PointOfSale() {
         >
           <div className="flex justify-around">
             <h5 className="text-8px font-bold tracking-tight  dark:text-white">
-              Tax:
+              RegPrice:
             </h5>
             <h5 className="text-8px font-bold tracking-tight  dark:text-white">
-              $22.50
+              ${getNormalPrice}
             </h5>
           </div>
           <div className="flex justify-around relative h-30 ">
@@ -262,7 +280,7 @@ function PointOfSale() {
               Total Price:
             </h5>
             <h5 className="text-xl font-bold tracking-tight  dark:text-white">
-              $44.50
+              ${getFullPrice}
             </h5>
           </div>
         </Card>
