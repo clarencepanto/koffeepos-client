@@ -1,5 +1,5 @@
 import "./PointOfSale.scss";
-import io from "socket.io-client";
+import socket from "../../socket";
 import {
   Card,
   Button,
@@ -17,12 +17,10 @@ import {
   TableRow,
   Select,
 } from "flowbite-react";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import Navigation from "../Navigation/Navigation";
 import axios from "axios";
-
-// establish real time connection
-const socket = io("http://localhost:8080");
 
 function PointOfSale() {
   const [openModal, setOpenModal] = useState(false);
@@ -33,32 +31,33 @@ function PointOfSale() {
   const [getQuantity, setGetQuantity] = useState(1);
   const [getNormalPrice, setGetNormalPrice] = useState(0);
   const [getFullPrice, setGetFullPrice] = useState(0);
-  const [getAvailableProducts, setGetAvailableProducts] = useState([]);
+  const [availabilityUpdates, setAvailabilityUpdates] = useState([]);
 
-  console.log(getAvailableProducts);
-
-  // fetch product data
+  // fetch product data and availability data
   useEffect(() => {
     const getProductData = async () => {
       const response = await axios.get("http://localhost:8080/products");
       setProductArray(response.data);
     };
+    const getInitialAvailability = async () => {
+      const response = await axios.get("http://localhost:8080/recipes");
+      setAvailabilityUpdates(response.data);
+    };
 
     getProductData();
+    getInitialAvailability();
 
-    // Socket listener for real-time updates
-    socket.on("productUpdated", (updatedProduct) => {
-      setProductArray((prevProducts) =>
-        prevProducts.map((product) =>
-          product.id === updatedProduct.id ? updatedProduct : product
-        )
-      );
+    //   // for available products after purchase
+    const handleUpdate = (data) => {
+      console.log("✅ Received updated availability:", data);
+      setAvailabilityUpdates(data);
+    };
+
+    socket.on("connect", () => {
+      console.log("Socket connected:", socket.id);
     });
 
-    // Clean up on unmount
-    return () => {
-      socket.off("productUpdated");
-    };
+    socket.on("product_availability_update", handleUpdate);
   }, []);
 
   // get id for patch request
@@ -66,7 +65,7 @@ function PointOfSale() {
     setGetCardId(getId);
   };
 
-  // handle patch request
+  // handle patch quantity request
   const updateProductQuantity = async () => {
     try {
       // update request
@@ -98,15 +97,26 @@ function PointOfSale() {
     setGetFullPrice(fullPrice);
   }, [confirmedProduct]);
 
-  // get the info about product availability
-  useEffect(() => {
-    const getProductAvailabilityData = async () => {
-      const response = await axios.get("http://localhost:8080/recipes");
-      setGetAvailableProducts(response.data);
-    };
+  // delete the item cart
+  const handleRemoveFromCart = (id) => {
+    setConfirmedProduct((prevCart) =>
+      prevCart.filter((item) => item.id !== id)
+    );
+  };
 
-    getProductAvailabilityData();
-  }, []);
+  // post request after checking out
+  const checkoutProducts = async () => {
+    try {
+      const checkoutItems = confirmedProduct.map((item) => ({
+        product_id: item.id,
+        quantity: item.quantity,
+      }));
+
+      await axios.post("http://localhost:8080/sales", checkoutItems);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="pos-container  pos">
@@ -132,11 +142,16 @@ function PointOfSale() {
         {productArray &&
           productArray.map((productdata) => {
             // Find matching recipe availability
-            const availableInfo = getAvailableProducts.find(
+            // const availableInfo = getAvailableProducts.find(
+            //   (item) => item.id === productdata.id
+            // );
+
+            // const availableStock = availableInfo ? availableInfo.available : 0;
+            const updated = availabilityUpdates.find(
               (item) => item.id === productdata.id
             );
 
-            const availableStock = availableInfo ? availableInfo.available : 0;
+            const availableStock = updated ? updated.available : 0;
             return (
               <Card
                 className="max-w-[200px] pos__monitor__product"
@@ -265,6 +280,7 @@ function PointOfSale() {
 
                   return (
                     <TableRow
+                      onClick={() => handleRemoveFromCart(data.id)}
                       className="bg-white dark:border-gray-700 dark:bg-gray-800"
                       key={data.id}
                     >
@@ -319,14 +335,15 @@ function PointOfSale() {
           <ModalBody>
             {/* Final summary of orders */}
             <h2 className="text-white">Orders</h2>
-            <p className="text-white">Espresso 1x</p>
-            <p className="text-white">Espresso 1x</p>
-            <p className="text-white">Espresso 1x</p>
-            <p className="text-white">Espresso 1x</p>
-            <p className="text-white">Espresso 1x</p>
-            <p className="text-white">Espresso 1x</p>
-            <p className="text-white">Espresso 1x</p>
-            <p className="text-white">Espresso 1x</p>
+
+            {confirmedProduct &&
+              confirmedProduct.map((data) => {
+                return (
+                  <p className="text-white">
+                    {data.name} {data.quantity}x
+                  </p>
+                );
+              })}
             {/* select a payment option */}
             <div className="space-y-6">
               <div className="max-w-md">
@@ -345,7 +362,14 @@ function PointOfSale() {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={() => setOpenModalCheckout(false)}>Pay Now</Button>
+            <Button
+              onClick={() => {
+                setOpenModalCheckout(false);
+                checkoutProducts();
+              }}
+            >
+              Pay Now
+            </Button>
           </ModalFooter>
         </Modal>
       </section>
