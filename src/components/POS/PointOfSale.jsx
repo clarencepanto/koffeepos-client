@@ -23,15 +23,20 @@ import Navigation from "../Navigation/Navigation";
 import axios from "axios";
 
 function PointOfSale() {
+  // product modifier
   const [openModal, setOpenModal] = useState(false);
   const [openModalCheckout, setOpenModalCheckout] = useState(false);
   const [productArray, setProductArray] = useState([]);
   const [confirmedProduct, setConfirmedProduct] = useState([]);
+  // patching
   const [getCardId, setGetCardId] = useState(null);
+  // product quantity
   const [getQuantity, setGetQuantity] = useState(1);
   const [getNormalPrice, setGetNormalPrice] = useState(0);
   const [getFullPrice, setGetFullPrice] = useState(0);
   const [availabilityUpdates, setAvailabilityUpdates] = useState([]);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [getDeleteId, setGetDeleteId] = useState(0);
 
   // fetch product data and availability data
   useEffect(() => {
@@ -40,7 +45,7 @@ function PointOfSale() {
       setProductArray(response.data);
     };
     const getInitialAvailability = async () => {
-      const response = await axios.get("http://localhost:8080/recipes");
+      const response = await axios.get("http://localhost:8080/productavail");
       setAvailabilityUpdates(response.data);
     };
 
@@ -123,7 +128,6 @@ function PointOfSale() {
       <nav className="flex-1">
         <Navigation className="nav-modify" />
       </nav>
-
       <section className="flex justify-around items-center  rounded-lg h-[6%] pos__categories-selection">
         <h2 className="rounded-lg pos__categories-selection__category">
           Coffee
@@ -136,22 +140,16 @@ function PointOfSale() {
           Beverages
         </h2>
       </section>
-
       {/* iterates the product data to ui */}
       <section className="bg-[#f5ecd5]/6 backdrop-blur-sm border border-white/20 rounded-xl p-6 hidden md:block w-[57.8%] h-[72%] overflow-y-scroll pos__monitor">
         {productArray &&
           productArray.map((productdata) => {
             // Find matching recipe availability
-            // const availableInfo = getAvailableProducts.find(
-            //   (item) => item.id === productdata.id
-            // );
-
-            // const availableStock = availableInfo ? availableInfo.available : 0;
             const updated = availabilityUpdates.find(
               (item) => item.id === productdata.id
             );
-
             const availableStock = updated ? updated.available : 0;
+
             return (
               <Card
                 className="max-w-[200px] pos__monitor__product"
@@ -174,8 +172,7 @@ function PointOfSale() {
             );
           })}
       </section>
-      {/* Modal */}
-
+      {/* Modal Modifier Selection*/}
       <Modal
         show={openModal}
         position="center"
@@ -258,7 +255,6 @@ function PointOfSale() {
           </Button>
         </ModalFooter>
       </Modal>
-
       {/* cart */}
       <section className=" pos__cart-container pos__cart">
         <div className=" overflow-y-auto pos__cart__monitor">
@@ -279,25 +275,29 @@ function PointOfSale() {
                   const normalPrice = data.price * data.quantity;
 
                   return (
-                    <TableRow
-                      onClick={() => handleRemoveFromCart(data.id)}
-                      className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                      key={data.id}
-                    >
-                      <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                        {data.name} {data.quantity}x
-                      </TableCell>
-                      <TableCell className="pos__cart__monitor__table-data">
-                        ${normalPrice}
-                      </TableCell>
-                    </TableRow>
+                    <>
+                      <TableRow
+                        onClick={() => {
+                          setDeleteModal(true);
+                          setGetDeleteId(data.id);
+                        }}
+                        className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                        key={data.id}
+                      >
+                        <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                          {data.name} {data.quantity}x
+                        </TableCell>
+                        <TableCell className="pos__cart__monitor__table-data">
+                          ${normalPrice}
+                        </TableCell>
+                      </TableRow>
+                    </>
                   );
                 })}
             </TableBody>
           </Table>
         </div>
       </section>
-
       {/* checkout price  */}
       <section className="absolute left-394 bottom-10 pos__checkout">
         <Card
@@ -322,9 +322,7 @@ function PointOfSale() {
           </div>
         </Card>
       </section>
-
       {/* Buy now */}
-
       <section className="absolute right-30 bottom-20">
         <Button onClick={() => setOpenModalCheckout(true)}>Checkout</Button>
         <Modal
@@ -366,6 +364,7 @@ function PointOfSale() {
               onClick={() => {
                 setOpenModalCheckout(false);
                 checkoutProducts();
+                setConfirmedProduct([]);
               }}
             >
               Pay Now
@@ -373,6 +372,31 @@ function PointOfSale() {
           </ModalFooter>
         </Modal>
       </section>
+
+      {/* delete modal */}
+      <Modal show={deleteModal} size="md" onClose={() => setDeleteModal(false)}>
+        <ModalBody>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Are you sure you want to delete product?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <Button
+                onClick={() => {
+                  setDeleteModal(false);
+                  handleRemoveFromCart(getDeleteId);
+                }}
+              >
+                Delete
+              </Button>
+              <Button color="gray" onClick={() => setDeleteModal(false)}>
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </ModalBody>
+      </Modal>
     </div>
   );
 }
