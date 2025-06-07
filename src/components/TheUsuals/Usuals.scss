@@ -1,0 +1,54 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mediaquery" as *;
+@use "../../styles/partials/fonts" as *;
+
+.usuals__monitor {
+  @media (min-width: 1920px) {
+    position: absolute;
+    top: 3.5rem;
+    left: 20rem;
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+    min-width: 1540px;
+  }
+
+  &__title {
+    position: relative;
+    left: 33rem;
+    top: 2rem;
+    font-family: $cinzel;
+    color: $koffeepos-darkmocha;
+  }
+}
+
+.search__input {
+  @media (min-width: 1920px) {
+    position: absolute;
+    top: 8rem;
+    left: 6rem;
+    z-index: 10;
+    min-width: 800px;
+    color: $koffeepos-mocha;
+  }
+}
+
+.usuals__add__loyalty {
+  min-width: 400px;
+}
+
+.loyalty__profile {
+  @media (min-width: 1920px) {
+    position: absolute;
+    top: 280px;
+    left: 420px;
+    z-index: 30;
+    min-width: 1280px;
+    min-height: 555px;
+    overflow-y: scroll;
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+}

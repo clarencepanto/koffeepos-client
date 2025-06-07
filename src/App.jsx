@@ -7,6 +7,7 @@ import Products from "./components/Products/Products";
 import Ingredients from "./components/Ingredients/Ingredients";
 import SummaryTable from "./components/SummaryTable/SummaryTable";
 import Supplier from "./components/Supplier/Supplier";
+import Usuals from "./components/TheUsuals/Usuals";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/ingredients" element={<Ingredients />}></Route>
           <Route path="/summarytable" element={<SummaryTable />}></Route>
           <Route path="/supplier" element={<Supplier />}></Route>
+          <Route path="/theusuals" element={<Usuals />}></Route>
           <Route path="/logout" element={<Authentication />}></Route>
         </Routes>
         <ToastContainer />
