@@ -109,7 +109,7 @@ function PointOfSale() {
     );
   };
 
-  // post request after checking out
+  // post request after checking out the product order and will adjust inventory accordingly
   const checkoutProducts = async () => {
     try {
       const checkoutItems = confirmedProduct.map((item) => ({
