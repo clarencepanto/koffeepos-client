@@ -69,24 +69,33 @@ function Usuals() {
     customer_phone: "",
   });
   const [deleteLoyaltyModal, setDeleteLoyaltyModal] = useState(false);
-  const [newLoyaltyRecipe, setNewLoyaltyRecipe] = useState({
-    product_name: "",
-    product_price: "",
-    product_qty: "",
-    product_ingredients: [], // ← array of selected ingredient IDs/names
-  });
 
   // get data from backend
   const [customerData, setCustomerData] = useState("");
-  const [customerProducts, setCustomerProducts] = useState("");
 
-  // mock data
-  const availableIngredients = [
-    { id: 1, name: "Espresso" },
-    { id: 2, name: "Milk" },
-    { id: 3, name: "Sugar" },
-    { id: 4, name: "Caramel" },
-  ];
+  // new loyalty products
+  const [newLoyaltyProduct, setNewLoyaltyProduct] = useState({
+    product_name: "",
+    product_qty: "",
+    product_price: "",
+    product_ingredients: [],
+  });
+
+  const [getSelectedLoyaltyProducts, setGetSelectedLoyaltyProducts] =
+    useState("");
+
+  const [getIdForProductDeletion, setGetIdForProductDeletion] = useState("");
+
+  const [availableIngredients, setAvailableIngredients] = useState([]);
+
+  useEffect(() => {
+    const getAvailIngredients = async () => {
+      const response = await axios.get("http://localhost:8080/ingredients");
+      setAvailableIngredients(response.data);
+    };
+
+    getAvailIngredients();
+  }, []);
 
   // for search functionality
   const filteredItems = customerData?.length
@@ -98,15 +107,6 @@ function Usuals() {
           data.customer_phone?.includes(searchLoyalty)
       )
     : [];
-
-  // loyalty create product onchange
-  const handleTextChange = (e) => {
-    const { name, value } = e.target;
-    setNewLoyaltyRecipe((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
   // adding handle loyalty onchange
   const handleChange = (e) => {
@@ -196,19 +196,6 @@ function Usuals() {
 
   // get loyalty product
 
-  const getCustomerProducts = async () => {
-    if (selectedCustomerId) {
-      const response = await axios.get(
-        `http://localhost:8080/customerproducts/${selectedCustomerId}`
-      );
-      setCustomerProducts(response.data);
-    }
-  };
-
-  useEffect(() => {
-    getCustomerProducts();
-  }, [selectedCustomerId]);
-
   // edit modal loyalty products
   const openEditModal = (product) => {
     setEditLoyaltyProducts({
@@ -216,7 +203,7 @@ function Usuals() {
       product_name: product.product_name,
       product_ingredients: Array.isArray(product.product_ingredients)
         ? product.product_ingredients
-        : product.product_ingredients?.split(",") || [], // just in case DB returns comma string
+        : JSON.parse(product.product_ingredients.split(",") || "[]"), // just in case DB returns comma string
       product_qty: product.product_qty,
       product_price: product.product_price,
     });
@@ -249,6 +236,14 @@ function Usuals() {
     });
   };
 
+  // set individual customer products
+  const fetchCustomerProducts = async () => {
+    const res = await axios.get(
+      `http://localhost:8080/customerproducts/${selectedCustomerId}`
+    );
+    setGetSelectedLoyaltyProducts(res.data);
+  };
+
   // handle edit sub
   const handleEditSubmitForLoyaltySpecial = async (e) => {
     e.preventDefault();
@@ -259,13 +254,82 @@ function Usuals() {
         editLoyaltyProducts
       );
       alert("Product updated!");
-      await getCustomerProducts();
+
+      await fetchCustomerProducts();
       setLoyaltyEditRecipeModal(false);
-      // Call your data fetcher here if you want to refresh product list:
-      // getCustomerProducts();
     } catch (err) {
       console.error("Update failed:", err);
       alert("Failed to update product.");
+    }
+  };
+
+  // for creating new loyalty product change
+  const handleNewInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewLoyaltyProduct((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // for creating new loyalty product checkbox
+  const handleNewIngredientToggle = (e) => {
+    const { value, checked } = e.target;
+
+    setNewLoyaltyProduct((prev) => {
+      const updated = checked
+        ? [...prev.product_ingredients, value]
+        : prev.product_ingredients.filter((ing) => ing !== value);
+
+      return {
+        ...prev,
+        product_ingredients: updated,
+      };
+    });
+  };
+
+  if (getSelectedLoyaltyProducts) {
+    console.log(getSelectedLoyaltyProducts);
+  }
+
+  // for posting new loyalty product
+  const handleNewLoyaltyProductSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post(
+        `http://localhost:8080/customerproducts/${selectedCustomerId}`,
+        newLoyaltyProduct
+      );
+      alert("New product created!");
+
+      setNewLoyaltyProduct({
+        product_name: "",
+        product_qty: "",
+        product_price: "",
+        product_ingredients: [],
+      });
+
+      // individual list products
+      fetchCustomerProducts();
+      setLoyaltyCreateRecipeModal(false); // close modal
+    } catch (err) {
+      console.error("Failed to create product:", err);
+      alert("Creation failed.");
+    }
+  };
+
+  useEffect(() => {
+    fetchCustomerProducts();
+  }, [selectedCustomerId]);
+
+  // handle delete
+  const handleDeleteProduct = async (productId) => {
+    try {
+      await axios.delete(`http://localhost:8080/customerproducts/${productId}`);
+      alert("Product deleted!");
+
+      await fetchCustomerProducts(); // 🔄 Refresh the list
+    } catch (err) {
+      console.error("Delete failed:", err);
+      alert("Failed to delete product.");
     }
   };
 
@@ -474,38 +538,42 @@ function Usuals() {
         >
           <ModalHeader>{selectedCustomer.customer_name}</ModalHeader>
           <ModalBody>
-            {customerProducts && (
-              <div className="space-y-6">
-                <h2 className="text-white ">
-                  Product Name: {customerProducts.product_name}
-                  <div className="mb-1 mt-1">
-                    Qty:{customerProducts.product_qty}x
+            {getSelectedLoyaltyProducts &&
+              selectedCustomerId &&
+              getSelectedLoyaltyProducts.map((data) => {
+                return (
+                  <div className="space-y-6" key={data.id}>
+                    <h2 className="text-white ">
+                      Product Name: {data.product_name}
+                      <div className="mb-1 mt-1">Qty:{data.product_qty}x</div>
+                      <div>Price: ${data.product_price}</div>
+                      <div>
+                        Ingredients Used: {data.product_ingredients.join(", ")}
+                      </div>
+                      <div className="mt-5 mb-2 flex">
+                        <HiOutlineTrash
+                          className=" text-2xl cursor-pointer"
+                          onClick={() => {
+                            setLoyaltyDeleteRecipeModal(true);
+                            setGetIdForProductDeletion(data.id);
+                          }}
+                        />
+                        <HiOutlinePencil
+                          className="ml-3 text-2xl cursor-pointer "
+                          onClick={() => {
+                            openEditModal(data);
+                          }}
+                        />
+                      </div>
+                    </h2>
                   </div>
-                  <div>Price: ${customerProducts.product_price}</div>
-                  <div>
-                    Ingredients Used:{" "}
-                    {customerProducts.product_ingredients.join(", ")}
-                  </div>
-                  <div className="mt-5 mb-2 flex">
-                    <HiOutlineTrash
-                      className=" text-2xl cursor-pointer"
-                      onClick={() => setLoyaltyDeleteRecipeModal(true)}
-                    />
-                    <HiOutlinePencil
-                      className="ml-3 text-2xl cursor-pointer "
-                      onClick={() => {
-                        openEditModal(customerProducts);
-                      }}
-                    />
-                  </div>
-                </h2>
-                <Button onClick={() => setLoyaltyCreateRecipeModal(true)}>
-                  Add Customized Recipe
-                </Button>
-              </div>
-            )}
+                );
+              })}
           </ModalBody>
           <ModalFooter>
+            <Button onClick={() => setLoyaltyCreateRecipeModal(true)}>
+              Add Customized Recipe
+            </Button>
             <Button onClick={() => setOpenModalLoyalty(false)}>
               Add To Cart
             </Button>
@@ -556,11 +624,11 @@ function Usuals() {
         {/* loyalty products */}
 
         {/* modal for creating new loyalty recipe */}
-        {/* <Modal show={LoyaltyCreateRecipeModal} size="md" popup>
+        <Modal show={LoyaltyCreateRecipeModal} size="md" popup>
           <ModalBody>
             <div className="space-y-6 pt-5">
               <form
-                onSubmit={handleSubmit}
+                onSubmit={handleNewLoyaltyProductSubmit}
                 className="flex max-w-md flex-col gap-4 p-5"
               >
                 <div>
@@ -572,8 +640,21 @@ function Usuals() {
                     id="specialorder_name"
                     type="text"
                     placeholder="specialordername...."
-                    onChange={handleTextChange}
-                    value={newLoyaltyRecipe.product_name}
+                    onChange={handleNewInputChange}
+                    value={newLoyaltyProduct.product_name}
+                    required
+                    shadow
+                  />
+                </div>
+                <div>
+                  <div className="mb-2 block">
+                    <Label htmlFor="specialorder_qty">Product Qty</Label>
+                  </div>
+                  <TextInput
+                    type="text"
+                    name="product_qty"
+                    value={newLoyaltyProduct.product_qty}
+                    onChange={handleNewInputChange}
                     required
                     shadow
                   />
@@ -586,15 +667,15 @@ function Usuals() {
                     name="product_price"
                     id="special-order-price"
                     type="number"
-                    onChange={handleTextChange}
-                    value={newLoyaltyRecipe.product_price}
+                    onChange={handleNewInputChange}
+                    value={newLoyaltyProduct.product_price}
                     required
                     shadow
                   />
                 </div>
 
                 {/* Ingredient Checkboxes */}
-        {/* <div>
+                <div>
                   <p className="mb-2 font-semibold text-white">
                     Select Ingredients:
                   </p>
@@ -606,10 +687,10 @@ function Usuals() {
                       <input
                         type="checkbox"
                         value={ingredient.name}
-                        checked={newLoyaltyRecipe.ingredients.includes(
+                        checked={newLoyaltyProduct.product_ingredients.includes(
                           ingredient.name
                         )}
-                        onChange={() => handleIngredientToggle(ingredient.name)}
+                        onChange={handleNewIngredientToggle}
                       />
                       {ingredient.name}
                     </label>
@@ -622,9 +703,9 @@ function Usuals() {
               </form>
             </div>
           </ModalBody>
-        </Modal> */}
+        </Modal>
 
-        {/* modal for deleting a special order */}
+        {/* modal for deleting a product */}
         <Modal
           show={loyaltyDeleteRecipeModal}
           size="md"
@@ -641,7 +722,10 @@ function Usuals() {
               <div className="flex justify-center gap-4">
                 <Button
                   color="red"
-                  onClick={() => setLoyaltyDeleteRecipeModal(false)}
+                  onClick={() => {
+                    handleDeleteProduct(getIdForProductDeletion),
+                      setLoyaltyDeleteRecipeModal(false);
+                  }}
                 >
                   Yes, I'm sure
                 </Button>
@@ -659,85 +743,6 @@ function Usuals() {
         {/* {edit modal for loyalty products} */}
         <Modal show={loyaltyEditRecipeModal} size="md" popup>
           <ModalBody>
-            {/* <form
-              onSubmit={handleEditLoyaltyProductSubmit}
-              className="flex max-w-md flex-col gap-4 p-5"
-            >
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="specialorder_name">Product Name</Label>
-                </div>
-                <TextInput
-                  name="product_name"
-                  id="specialorder_name"
-                  type="text"
-                  placeholder="specialordername...."
-                  onChange={handleEditLoyaltyProductChange}
-                  value={editLoyaltyProducts.product_name}
-                  required
-                  shadow
-                />
-              </div>
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="specialorder_qty">Product Qty</Label>
-                </div>
-                <TextInput
-                  name="product_qty"
-                  id="specialorder_qty"
-                  type="text"
-                  placeholder="specialorderqty...."
-                  onChange={handleEditLoyaltyProductChange}
-                  value={editLoyaltyProducts.product_qty}
-                  required
-                  shadow
-                />
-              </div>
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="special-order-price">Product Price</Label>
-                </div>
-                <TextInput
-                  name="product_price"
-                  id="special-order-price"
-                  type="number"
-                  placeholder="specialorderprice...."
-                  onChange={handleEditLoyaltyProductChange}
-                  value={editLoyaltyProducts.product_price}
-                  required
-                  shadow
-                />
-              </div> */}
-            {/* Ingredient Checkboxes */}
-            {/* <div>
-                <p className="mb-2 font-semibold text-white">
-                  Select Ingredients:
-                </p>
-                {availableIngredients.map((ingredient) => (
-                  <label
-                    key={ingredient.id}
-                    className="flex items-center gap-2 mb-1 text-white"
-                  >
-                    <input
-                      type="checkbox"
-                      value={ingredient.name}
-                      checked={editLoyaltyProducts.product_ingredients.includes(
-                        ingredient.name
-                      )}
-                      onChange={() =>
-                        handleIngredientEditToggle(ingredient.name)
-                      }
-                    />
-                    {ingredient.name}
-                  </label>
-                ))}
-              </div> */}
-            {/* <Button type="submit">Save</Button>
-              <Button onClick={() => setLoyaltyEditRecipeModal(false)}>
-                Cancel
-              </Button>
-            </form> */}
-
             <form
               className="flex max-w-md flex-col gap-4 p-5"
               onSubmit={handleEditSubmitForLoyaltySpecial}
