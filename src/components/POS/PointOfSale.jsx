@@ -123,6 +123,12 @@ function PointOfSale() {
     }
   };
 
+  // call cart from usuals
+  useEffect(() => {
+    const cartData = JSON.parse(sessionStorage.getItem("checkoutCart")) || [];
+    setConfirmedProduct(cartData);
+  }, []);
+
   return (
     <div className="pos-container  pos">
       <nav className="flex-1">

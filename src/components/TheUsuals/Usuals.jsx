@@ -285,10 +285,6 @@ function Usuals() {
     });
   };
 
-  if (getSelectedLoyaltyProducts) {
-    console.log(getSelectedLoyaltyProducts);
-  }
-
   // for posting new loyalty product
   const handleNewLoyaltyProductSubmit = async (e) => {
     e.preventDefault();
@@ -331,6 +327,23 @@ function Usuals() {
       console.error("Delete failed:", err);
       alert("Failed to delete product.");
     }
+  };
+
+  // add to cart
+  const handleAddToCart = () => {
+    const cart = JSON.parse(sessionStorage.getItem("checkoutCart")) || [];
+
+    const newItem = {
+      id: crypto.randomUUID(), // ensures unique item
+      name: getSelectedLoyaltyProducts.product_name,
+      quantity: Number(getSelectedLoyaltyProducts.product_qty),
+      price: Number(getSelectedLoyaltyProducts.product_price),
+    };
+
+    const updatedCart = [...cart, newItem];
+    sessionStorage.setItem("checkoutCart", JSON.stringify(updatedCart));
+
+    alert("Product sent to POS!");
   };
 
   return (
@@ -574,7 +587,12 @@ function Usuals() {
             <Button onClick={() => setLoyaltyCreateRecipeModal(true)}>
               Add Customized Recipe
             </Button>
-            <Button onClick={() => setOpenModalLoyalty(false)}>
+            <Button
+              onClick={() => {
+                handleAddToCart();
+                setOpenModalLoyalty(false);
+              }}
+            >
               Add To Cart
             </Button>
             <Button
@@ -692,7 +710,8 @@ function Usuals() {
                         )}
                         onChange={handleNewIngredientToggle}
                       />
-                      {ingredient.name}
+                      {ingredient.name} Stock: {ingredient.stock}{" "}
+                      {ingredient.unit}
                     </label>
                   ))}
                 </div>
