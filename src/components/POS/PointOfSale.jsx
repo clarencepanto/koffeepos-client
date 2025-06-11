@@ -37,6 +37,8 @@ function PointOfSale() {
   const [availabilityUpdates, setAvailabilityUpdates] = useState([]);
   const [deleteModal, setDeleteModal] = useState(false);
   const [getDeleteId, setGetDeleteId] = useState(0);
+  const [customerName, setCustomerName] = useState("");
+ 
 
   // fetch product data and availability data
   useEffect(() => {
@@ -124,10 +126,18 @@ function PointOfSale() {
   };
 
   // call cart from usuals
-  useEffect(() => {
-    const cartData = JSON.parse(sessionStorage.getItem("checkoutCart")) || [];
-    setConfirmedProduct(cartData);
-  }, []);
+useEffect(() => {
+  const cartData = JSON.parse(sessionStorage.getItem("checkoutCart")) || {
+    customer: "",
+    items: [],
+  };
+  setConfirmedProduct(cartData.items || []);
+  setCustomerName(cartData.customer || "");
+}, []);
+
+  const clearCheckoutCart = () => {
+  sessionStorage.removeItem("checkoutCart");
+};
 
   return (
     <div className="pos-container  pos">
@@ -167,7 +177,7 @@ function PointOfSale() {
                 }}
                 key={productdata.id}
               >
-                <h5 className="text-center text-md font-bold tracking-tight dark:text-white">
+                <h5 className="text-center text-md font-bold tracking-tight dark:text-white text-2xl">
                   {productdata.name}
                 </h5>
                 <h6 className="text-center dark:text-white font-bold ">
@@ -290,9 +300,12 @@ function PointOfSale() {
                         className="bg-white dark:border-gray-700 dark:bg-gray-800"
                         key={data.id}
                       >
-                        <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
-                          {data.name} {data.quantity}x
-                        </TableCell>
+                        {customerName ? <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                            {customerName}  {data.product_qty}x
+                          </TableCell> : <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white pos__cart__monitor__table-data">
+                            {data.name}  {data.quantity}x
+                          </TableCell> }
+                          
                         <TableCell className="pos__cart__monitor__table-data">
                           ${normalPrice}
                         </TableCell>
@@ -371,6 +384,7 @@ function PointOfSale() {
                 setOpenModalCheckout(false);
                 checkoutProducts();
                 setConfirmedProduct([]);
+                clearCheckoutCart();
               }}
             >
               Pay Now

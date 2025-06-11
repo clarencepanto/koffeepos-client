@@ -15,10 +15,23 @@ import {
   TextInput,
 } from "flowbite-react";
 import Navigation from "../Navigation/Navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Ingredients() {
   const [openModal, setOpenModal] = useState(false);
+  const [getIngredients, setGetIngredients] =useState([])
+
+  console.log(getIngredients)
+
+      const getIngredientsData = async () => {
+      const response = await axios.get("http://localhost:8080/ingredients");
+      setGetIngredients(response.data);
+    };
+
+    useEffect(() => {
+      getIngredientsData();
+    },[])
 
   return (
     <div>
@@ -37,11 +50,13 @@ function Ingredients() {
             </TableRow>
           </TableHead>
           <TableBody className="divide-y">
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
+            {getIngredients && getIngredients.map((data) => {
+              return(
+              <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800" key={data.id}>
               <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Sugar
+                {data.name}
               </TableCell>
-              <TableCell>100 gm</TableCell>
+              <TableCell>{data.stock} {data.unit}</TableCell>
               <TableCell>2025-05-07</TableCell>
               <TableCell>2026-05-07</TableCell>
               <TableCell>
@@ -52,85 +67,10 @@ function Ingredients() {
                   Edit
                 </a>
               </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Milk
-              </TableCell>
-              <TableCell>1000 ml</TableCell>
-              <TableCell>2025-05-07</TableCell>
-              <TableCell>2026-05-07</TableCell>
-              <TableCell>
-                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                  Edit
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Coffee Beans
-              </TableCell>
-              <TableCell>200 gm</TableCell>
-              <TableCell>2025-05-07</TableCell>
-              <TableCell>2025-05-07</TableCell>
-              <TableCell>
-                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                  Edit
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Matcha Powder
-              </TableCell>
-              <TableCell>25 gm</TableCell>
-              <TableCell>2025-05-07</TableCell>
-              <TableCell>2025-05-07</TableCell>
-              <TableCell>
-                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                  Edit
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Cocoa Powder
-              </TableCell>
-              <TableCell>10 gm</TableCell>
-              <TableCell>2025-05-07</TableCell>
-              <TableCell>2027-05-07</TableCell>
-              <TableCell>
-                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                  Edit
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Sugar
-              </TableCell>
-              <TableCell>100 gm</TableCell>
-              <TableCell>2025-05-07</TableCell>
-              <TableCell>2026-05-07</TableCell>
-              <TableCell>
-                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                  Edit
-                </a>
-              </TableCell>
-            </TableRow>
-            <TableRow className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Milk
-              </TableCell>
-              <TableCell>1000 ml</TableCell>
-              <TableCell>2025-05-07</TableCell>
-              <TableCell>2026-05-07</TableCell>
-              <TableCell>
-                <a className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                  Edit
-                </a>
-              </TableCell>
-            </TableRow>
+            </TableRow>)  
+           
+            })}
+           
           </TableBody>
         </Table>
 

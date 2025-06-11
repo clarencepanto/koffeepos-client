@@ -330,21 +330,27 @@ function Usuals() {
   };
 
   // add to cart
-  const handleAddToCart = () => {
-    const cart = JSON.parse(sessionStorage.getItem("checkoutCart")) || [];
-
-    const newItem = {
-      id: crypto.randomUUID(), // ensures unique item
-      name: getSelectedLoyaltyProducts.product_name,
-      quantity: Number(getSelectedLoyaltyProducts.product_qty),
-      price: Number(getSelectedLoyaltyProducts.product_price),
-    };
-
-    const updatedCart = [...cart, newItem];
-    sessionStorage.setItem("checkoutCart", JSON.stringify(updatedCart));
-
-    alert("Product sent to POS!");
+const handleAddToCart = (product) => {
+  const cart = JSON.parse(sessionStorage.getItem("checkoutCart")) || {
+    customer: "",
+    items: [],
   };
+
+  const newItem = {
+    id: crypto.randomUUID(),
+    name: product.product_name,
+    quantity: Number(product.product_qty),
+    price: Number(product.product_price),
+  };
+
+  const updatedCart = {
+    customer: cart.customer || selectedCustomer.customer_name,
+    items: [...cart.items, newItem],
+  };
+
+  sessionStorage.setItem("checkoutCart", JSON.stringify(updatedCart));
+  alert("Product sent to POS!");
+};
 
   return (
     <div>
@@ -391,7 +397,7 @@ function Usuals() {
                   <div className="mt-4 flex space-x-3 lg:mt-6">
                     <a
                       href="#"
-                      className="inline-flex items-center rounded-lg bg-cyan-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
+                      className="inline-flex items-center rounded-lg bg-cyan-600 px-4 py-2 text-center text-sm font-medium text-white hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-primary-700 dark:hover:bg-primary-800 dark:focus:ring-cyan-800"
                       onClick={() => {
                         setOpenModalLoyalty(true);
                         setSelectedCustomerId(data.id);
@@ -589,7 +595,7 @@ function Usuals() {
             </Button>
             <Button
               onClick={() => {
-                handleAddToCart();
+                handleAddToCart(getSelectedLoyaltyProducts);
                 setOpenModalLoyalty(false);
               }}
             >
