@@ -1,0 +1,123 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mediaquery" as *;
+@use "../../styles/partials/fonts" as *;
+
+.product__monitor {
+  margin-top: 1rem;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+
+  @include tablet {
+    position: absolute;
+    top: 3rem;
+    left: 16rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
+  @include desktop {
+    position: absolute;
+    top: 3rem;
+    left: 16.1rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 1920px) {
+    position: absolute;
+    top: 3rem;
+    left: 16.1rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__products {
+    font-size: 0.55rem;
+    text-align: center;
+    max-width: 140px;
+    height: 150px;
+    margin: 1rem auto;
+
+    @include tablet {
+      font-size: 0.8rem;
+      min-width: 200px;
+      min-height: 230px;
+    }
+    @include desktop {
+      font-size: 1.2rem;
+      min-width: 300px;
+      min-height: 300px;
+    }
+
+    @media (min-width: 1920px) {
+      font-size: 2rem;
+      min-width: 500px;
+      min-height: 500px;
+    }
+
+    img {
+      width: 100%;
+      min-height: 70px;
+      object-fit: cover;
+
+      @include tablet {
+        width: 100%;
+        min-height: 120px;
+        object-fit: cover;
+      }
+
+      @include desktop {
+        width: 100%;
+        min-height: 180px;
+        object-fit: cover;
+      }
+
+      @media (min-width: 1920px) {
+        width: 100%;
+        min-height: 290px;
+      }
+    }
+  }
+}
+
+.product__modal {
+  &__body {
+    font-size: 0.5rem;
+    @include tablet {
+      font-size: 1rem;
+    }
+
+    @include desktop {
+      font-size: 1.6rem;
+    }
+
+    @media (min-width: 1920px) {
+      font-size: 3rem;
+    }
+
+    h2 {
+      font-size: 0.9rem;
+
+      @include tablet {
+        font-size: 2rem;
+      }
+
+      @include desktop {
+        font-size: 3rem;
+      }
+
+      @media (min-width: 1920px) {
+        font-size: 3rem;
+      }
+    }
+  }
+}
+
+.modal-header {
+  h3 {
+    @media (min-width: 1920px) {
+      font-size: 2.5rem;
+    }
+  }
+}

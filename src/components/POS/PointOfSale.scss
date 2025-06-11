@@ -1,0 +1,124 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mediaquery" as *;
+@use "../../styles/partials/fonts" as *;
+
+.pos-container {
+  @include desktop {
+    display: flex;
+    position: relative;
+  }
+}
+
+.pos {
+  &__categories-selection {
+    @include desktop {
+      position: absolute;
+      top: 4.3rem;
+      left: 17rem;
+      background-color: $koffeepos-mocha;
+    }
+
+    @media (min-width: 1920px) {
+      min-width: 1300px;
+    }
+
+    &__category {
+      @include desktop {
+        font-family: $roboto;
+        font-weight: 300;
+        font-size: 1.2rem;
+        color: $koffeepos-darkmocha;
+        padding: 0.5rem 1rem;
+
+        &:hover {
+          background-color: $koffeepos-beige;
+        }
+      }
+    }
+  }
+  &__monitor {
+    @include desktop {
+      position: absolute;
+      top: 8.5rem;
+      left: 17rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    @media (min-width: 1920px) {
+      width: 1300px;
+    }
+
+    &__product {
+      @include desktop {
+        margin: 0.9rem;
+      }
+
+      img {
+        @include desktop {
+          height: 132px;
+          width: 198px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  &__cart {
+    @include desktop {
+      position: absolute;
+      top: 3.4rem;
+      left: 64rem;
+      background-color: $koffeepos-mocha;
+    }
+
+    @media (min-width: 1920px) {
+      left: 98.5rem;
+      width: 340px;
+      height: 900px;
+    }
+
+    &__monitor {
+      @include desktop {
+        bottom: 0.1rem;
+      }
+
+      @media (min-width: 1920px) {
+        height: 920px;
+      }
+
+      &__table-head {
+        @include desktop {
+          border-radius: 0;
+          background-color: $koffeepos-mocha;
+          color: $koffeepos-darkmocha;
+          font-family: $roboto;
+          font-weight: 500;
+          border-right: 1px solid $koffeepos-darkmocha;
+        }
+      }
+      &__table-data {
+        @include desktop {
+          border-radius: 0;
+          background-color: $koffeepos-mocha;
+          color: $koffeepos-darkmocha;
+          font-family: $roboto;
+        }
+      }
+    }
+  }
+
+  &__checkout {
+    min-width: 256px;
+
+    @media (min-width: 1920px) {
+      min-width: 340px;
+    }
+  }
+}
+
+
+.pos__monitor * {
+font-family: $roboto;
+}

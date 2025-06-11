@@ -1,0 +1,122 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mediaquery" as *;
+@use "../../styles/partials/fonts" as *;
+
+.shopping__cart {
+  position: absolute;
+  right: 2rem;
+  top: 85px;
+  z-index: 2;
+  font-size: 0.8rem;
+
+  @include tablet {
+    position: absolute;
+    right: 2rem;
+    top: 63px;
+    z-index: 2;
+    font-size: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    position: absolute;
+    right: 4rem;
+    top: 63px;
+    z-index: 2;
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 1920px) {
+    font-size: 1.8rem;
+    right: 16rem;
+  }
+}
+
+.table-cont-mobile-supplier {
+  width: 100vw;
+  position: relative;
+  top: 0;
+  font-size: 0.5rem;
+
+  @include tablet {
+    display: none;
+  }
+
+  @include desktop {
+    display: none;
+  }
+
+  .supplier-header {
+    font-size: 0.4rem;
+  }
+}
+
+// adjust table sizes
+.table-cont-supplier {
+  // without this, there would be a weird blk box if u dont put max 425px on tab and desktop design
+  @media (max-width: 425px) {
+    display: none;
+  }
+  @include tablet {
+    min-width: 510px;
+  }
+
+  @include desktop {
+    min-width: 800px;
+  }
+}
+
+// container for tables
+.ingredients-table-supplier {
+  position: absolute;
+  @include tablet {
+    top: 3.4rem;
+    left: 16rem;
+    max-height: 670px;
+    max-width: 800px;
+  }
+
+  @media (min-width: 1024px) {
+    min-width: 770px;
+  }
+
+  @include desktop {
+    top: 53px;
+    left: 290px;
+    min-width: 960px;
+
+    max-height: 670px;
+  }
+
+  @media (min-width: 1440px) {
+    min-width: 1110px;
+  }
+
+  @media (min-width: 1920px) {
+    min-width: 1599px;
+  }
+}
+
+// modal heght
+.table__shopping__supplier {
+  height: 700px;
+}
+
+.checkout-product-price {
+  font-size: 0.7rem;
+
+  @media (min-width: 425px) {
+    font-size: 1rem;
+  }
+  @include tablet {
+    font-size: 1.2rem;
+  }
+}
+
+.checkout-supply {
+  position: absolute;
+  bottom: 6px;
+  right: 0;
+
+  @media (min-width: 425px) {
+    right: 10px;
+  }
+}

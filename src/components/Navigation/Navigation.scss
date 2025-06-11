@@ -1,0 +1,61 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mediaquery" as *;
+@use "../../styles/partials/fonts" as *;
+
+html {
+  background: url("../../assets/images/pexels-emrecan-2079438.jpg") no-repeat
+    top center/cover;
+  height: 100vh;
+  overflow-y: hidden;
+  @include tablet {
+    background: url("../../assets/images/pexels-emrecan-2079438.jpg") no-repeat
+      top center/cover;
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  @include desktop {
+    background: url("../../assets/images/pexels-emrecan-2079438.jpg") no-repeat
+      top center/cover;
+    overflow-y: hidden;
+  }
+}
+
+.logo-container {
+  display: flex;
+  background-color: $koffeepos-caramel;
+  height: 55px;
+}
+
+.sidebar {
+  &__title {
+    color: $koffeepos-darkmocha;
+    font-family: $roboto;
+    font-weight: 300;
+    padding-bottom: 1rem;
+  }
+
+  &__item {
+    font-family: $roboto;
+    font-weight: 300;
+    color: $koffeepos-darkmocha;
+    padding: 1.6rem 0;
+
+    &--hide {
+      @include tablet {
+        display: none;
+      }
+
+      @include desktop {
+        display: flex;
+      }
+    }
+
+    &:hover {
+      background-color: $koffeepos-beige;
+    }
+
+    svg {
+      color: $koffeepos-caramel;
+    }
+  }
+}

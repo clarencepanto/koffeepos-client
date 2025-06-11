@@ -1,0 +1,44 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mediaquery" as *;
+@use "../../styles/partials/fonts" as *;
+
+.auth-container {
+  background: url("../../assets/images/pexels-apgpotr-683039.jpg") center
+    center/cover no-repeat;
+  height: 100vh;
+  padding: 1rem;
+}
+
+.auth {
+  &__header {
+    position: relative;
+    top: 75px;
+    color: $koffeepos-beige;
+    text-align: center;
+    font-family: $cinzel;
+
+    @include tablet {
+      font-size: 50px;
+    }
+  }
+  &__card {
+    position: relative;
+    top: 150px;
+    background-color: $koffeepos-caramel;
+
+    @include tablet {
+      margin: auto;
+    }
+  }
+  &__input {
+    input {
+      background-color: #fff;
+      border: none;
+      color: $koffeepos-caramel;
+    }
+  }
+  &__button {
+    background-color: $koffeepos-beige;
+    color: $koffeepos-caramel;
+  }
+}
